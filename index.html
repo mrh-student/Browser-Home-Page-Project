@@ -6,7 +6,6 @@
     <title>Home Page</title>
     <link href="main.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://underscorejs.org/underscore-min.js"></script>
@@ -16,10 +15,15 @@
   </head>
   <body onload="start();">
   <div id="outer-wrapper">
-    <p id="clock"></p>
+    <div id="clock"></div>
     <h1 id="greeting"></h1>
-    <div id="quote-wrapper">
-      <div id ="quote" class="expand"></div>
+    <div id="inner-wrapper">
+      <div id="quote-wrapper">
+        <div id ="quote" class="expand"></div>
+      </div>
+      <div id="weather-box">
+        <div id="current">Cork City | &nbsp;</div>
+      </div>
     </div>
     <input type="button" class="button" value="Change background" onclick="random_bg();"/>
     <div id="footer"></div>

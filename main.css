@@ -44,16 +44,23 @@ a {
   text-align: center; 
 }
 
+#inner-wrapper {
+  margin: inherit;
+  padding: inherit;
+  width: 60%;
+  overflow: hidden;
+  text-align: center;
+   
+}
+
 #quote-wrapper {
   margin: auto;
   margin-bottom: 5px; 
   padding: 5px;
   min-height: 80px;
-  min-width: 40%;
-  max-width: 50%;
+  max-width: 100%;
   background-color: rgba(225, 225, 226, 0.705);
   border-radius: 25px;
-  text-align: center;
   animation-name: expanding;
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
@@ -82,7 +89,19 @@ a {
   overflow: hidden; 
 }
 
+#weather-box {
+margin: auto;
+margin-top: 5px;
+background-color: rgba(182, 213, 248, 0.705);
+border-radius: 25px;
+min-width: 200px; 
+max-width: 60%; 
+}
 
+#current {
+  color: #fff;
+  line-height: 1.5em;
+}
 
 .button {
     background-color: rgb(106, 190, 118);
@@ -113,12 +132,10 @@ a {
 
 @keyframes expanding{
   from {
-    min-width: 40%;
-    max-width: 50%;
+    max-width: 70%;
   }
   to {
-    min-width: 50%;
-    max-width: 60%;
+    max-width: 100%;
   }
 }
 

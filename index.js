@@ -62,15 +62,16 @@ function get_weather (){
   var url = "http://ws.geonames.org/findNearByWeatherJSON?&lat=51.903614&lng=-8.468399&username=mhennig";
 
   $.getJSON(url, function(data) {
-    console.log( "JSON Data: " + data.weatherObservation.temperature);
     var temp = data.weatherObservation.temperature;
-    give_temp(temp);
+    var cloudiness = data.weatherObservation.clouds;
+    give_temp(temp, cloudiness);
   });
 }
 
-function give_temp(temp){
+function give_temp(temp, cloudiness){
+  
   var $current = $("#current");
-  $current.append("Temp: " + temp);
+  $current.append("it is currently " + temp + "°C with " + cloudiness);
 }
 
 function get_quote(){
