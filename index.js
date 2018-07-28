@@ -40,7 +40,7 @@ function random_bg(){
 
   var img_pick = _.sample(bg_images);
   var $bg_image = $("#page")
-  $bg_image.html("<style> #outer-wrapper{background-image: url("+img_pick+");background-size: cover; background-repeat: no-repeat; margin: auto; padding: 15px; width: 95vw; height: 93vh; border-radius: 25px; overflow: hidden;background-position: center center;}</style><link href='index.css' rel='stylesheet' type='text/css' />")  
+  $bg_image.html("<style> #outer-wrapper{background-image: url("+img_pick+");background-size: cover; background-repeat: no-repeat; margin: auto; padding: 15px; width: 95vw; height: 93vh; border-radius: 25px; overflow: hidden;background-position: center center;}</style><link href='main.css' rel='stylesheet' type='text/css' />")  
 }
 
 function startTime() {
@@ -62,6 +62,7 @@ function get_weather (){
   var url = "http://ws.geonames.org/findNearByWeatherJSON?&lat=51.903614&lng=-8.468399&username=mhennig";
 
   $.getJSON(url, function(data) {
+    console.log( "JSON Data: " + data.weatherObservation.temperature);
     var temp = data.weatherObservation.temperature;
     give_temp(temp);
   });
