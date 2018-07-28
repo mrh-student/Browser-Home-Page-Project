@@ -80,5 +80,13 @@ function get_quote(){
   var pick = _.sample(quotes);
   var $quote = $("#quote");
   $quote.html(pick);
-}  
+} 
+
+function openNav() {
+  document.getElementById("mySidenav").style.height = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.height = "0";
+}
 

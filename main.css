@@ -104,8 +104,7 @@ a {
   margin: 0 auto;
   background-color: rgba(182, 213, 248, 0.308);
   border-radius: 10px;
-  min-width: 200px; 
-  width: 25%; 
+   
 }
 
 #current, #dosomething {
@@ -118,10 +117,14 @@ a {
   font-size: 0.85em;
 }
 
-#bg_change {
+#dosomething {
+  font-size: 1em;
+}
+
+#background-box {
   margin: auto;
-  min-width: 200px; 
-  width: 25%;
+  min-width: 150px; 
+  width: 30%;
 }
 
 .button {
@@ -138,20 +141,56 @@ a {
   border-radius: 25px;
 }
 
-#box {
-  margin: 0 auto;
+#library {
   background-color: rgba(182, 213, 248, 0.308);
   border-radius: 10px;
-  min-width: 200px; 
-  width: 25%; 
+  min-width: 150px; 
+  width: 30%;
+  margin: auto; 
 }
 
-.utility {
-  float:left;
+#library.utility, #background-box.utility, #weather-box.utility {
+  float: left;
   display: inline-block;
   max-height: 70px;
-  
+  width: 30%;
+  min-width: 150px;
+  margin-right: 10px;
 }
+
+
+
+.sidenav {
+  margin: auto;
+  width: 180px;
+  height: 0;
+  position: fixed;
+  z-index: 1;
+  bottom: 100px;
+  left: 60%;
+  background-color: rgba(255, 255, 255, 0.705);
+  overflow-y: hidden;
+  transition: 0.5s;
+}
+
+.sidenav a {
+  padding: 10px;
+  text-decoration: none;
+  color: #000000;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #3d3a3a;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+}
+
 
 #footer {
   margin: auto 0;
