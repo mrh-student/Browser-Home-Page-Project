@@ -32,9 +32,9 @@ function greet_user() {
   } else {
     var greeting = "Looks like you are traveling outside of time. Or I am experiencing an error. One of the two."
   }
-
   var $greeting = $("#greeting");
   $greeting.html(greeting);
+  t = setTimeout(greet_user, 1000)
 }
 
 function random_bg(){
@@ -63,22 +63,23 @@ function checkTime(i) {
 
 function get_weather (){
   var url = "http://ws.geonames.org/findNearByWeatherJSON?&lat=51.903614&lng=-8.468399&username=mhennig";
-
   $.getJSON(url, function(data) {
     var temp = data.weatherObservation.temperature;
     var cloudiness = data.weatherObservation.clouds;
     give_temp(temp, cloudiness);
   });
+  var t = setTimeout(get_weather, 900000);
 }
 
 function give_temp(temp, cloudiness){
-  
+  var now = new Date();
   var $current = $("#current");
-  $current.append("It's " + temp + "°C with " + cloudiness);
+  $current.html("Cork City<br>It's " + temp + "°C with " + cloudiness);
+  console.log(now + " - Cork City - It's " + temp + "°C with " + cloudiness)
 }
 
 function get_quote(){
-  var quotes = ["<h3>The fear of death follows from the fear of life. One who lives life fully is prepared to die at any time.</h3><br><i>Mark Twain</i>","<h3>Idealistic as it may sound, altruism should be the driving force in business, not just competition and a desire for wealth.</h3><br><i>Dalai Lama</i>","<h3>The best teachers are those who show you where to look, but don't tell you what to see.</h3><br><i>Alexandra K. Trenfor</i>","<h3>Sitting quietly, doing nothing, Spring comes, and the grass grows by itself.</h3><br><i>Zenrin Kushû</i>","<h3>People do not seem to realize that their opinion of the world is also a confession of character.</h3><br><i>Ralph Waldo Emerson</i>","<h3>The problem is not the problem. The problem is your attitude about the problem.</h3><br><i>Captain Jack Sparrow</i>","<h3>It is the unknown we fear when we look upon death and darkness, nothing more.</h3><br><i>Albus Dumbledore</i>", "<h3>Denjetzigen Moment langt</h3><br><i>Unknown</i>"]
+  var quotes = ["<h3>The fear of death follows from the fear of life. One who lives life fully is prepared to die at any time.</h3><br><i>Mark Twain</i>","<h3>Idealistic as it may sound, altruism should be the driving force in business, not just competition and a desire for wealth.</h3><br><i>Dalai Lama</i>","<h3>The best teachers are those who show you where to look, but don't tell you what to see.</h3><br><i>Alexandra K. Trenfor</i>","<h3>Sitting quietly, doing nothing, spring comes, and the grass grows by itself.</h3><br><i>Zenrin Kushû</i>","<h3>People do not seem to realize that their opinion of the world is also a confession of character.</h3><br><i>Ralph Waldo Emerson</i>","<h3>The problem is not the problem. The problem is your attitude about the problem.</h3><br><i>Captain Jack Sparrow</i>","<h3>It is the unknown we fear when we look upon death and darkness, nothing more.</h3><br><i>Albus Dumbledore</i>", "<h3>Denjetzigen Moment langt</h3><br><i>Unknown</i>"]
 
   var pick = _.sample(quotes);
   var $quote = $("#quote");

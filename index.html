@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width">
     <title>Home Page</title>
     <link href="main.css" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://underscorejs.org/underscore-min.js"></script>
@@ -22,7 +22,7 @@
     <h1 id="greeting"></h1>
     <div id="inner-wrapper">
       <div id="timezone_wrapper">
-        <span id="sf" class="time_zone"></span>
+        <span id="sf" class="time_zone"><span class="sftemp"></span></span>
         <span id="nashville" class="time_zone"></span>
         <span id="mendoza" class="time_zone"></span>
         <span id="london" class="time_zone"></span>
@@ -34,7 +34,7 @@
       </div>
       <div id="utility_wrapper">
         <div id="weather-box" class="utility">
-          <div id="current">Cork City<br></div>
+          <div id="current"></div>
         </div>
         <div id="background-box" class="utility">
           <input type="button" class="button" value="Change background" onclick="random_bg();"/>
@@ -55,10 +55,11 @@
         </div>
       </div>
 
-    </div>
+  </div>
     
-    <div id="footer">
-    </div>
+  <div id="footer">
+    <a href="#" class="footer_link">Status</a>
+  </div>
   
     </div>
   </body>
