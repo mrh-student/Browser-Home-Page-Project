@@ -42,7 +42,8 @@ function random_bg(){
 
   var img_pick = _.sample(bg_images);
   var $bg_image = $("#page")
-  $bg_image.html("<style> #outer-wrapper{background-image: url("+img_pick+");background-size: cover; background-repeat: no-repeat; margin: auto; padding: 15px; width: 95vw; height: 93vh; border-radius: 25px; overflow: hidden;background-position: center center;}</style><link href='main.css' rel='stylesheet' type='text/css' />")  
+  $bg_image.html("<link href='main.css' rel='stylesheet' type='text/css' /><style> html {background: url("+img_pick+") no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}</style>")  
+  
 }
 
 function startTime() {
@@ -85,7 +86,7 @@ function get_quote(){
 } 
 
 function openNav() {
-  document.getElementById("mySidenav").style.height = "250px";
+  document.getElementById("mySidenav").style.height = "300px";
 }
 
 function closeNav() {
@@ -158,24 +159,6 @@ function worldclock() {
   document.getElementById("berlin").innerHTML = "Berlin: " + Berlin;
   document.getElementById("melbourne").innerHTML = "Melbourne: " + Melbourne;
   var t = setTimeout(worldclock, 500);
-
-  /* var $sftime = $("#sf");
-  $sftime.html("San Francisco: " + SanFrancisco);
-
-  var $nvtime = $("#nashville");
-  $nvtime.html("Nashville: " + Nashville);
-
-  var $mdtime = $("#mendoza");
-  $mdtime.html("Mendoza: " + Mendoza);
-
-  var $ldtime = $("#london");
-  $ldtime.html("London: " + London);
-
-  var $bltime = $("#berlin");
-  $bltime.html("Berlin: " + Berlin);
-
-  var $mbtime = $("#melbourne");
-  $mbtime.html("Melbourne: " + Melbourne)*/
 }
 
 

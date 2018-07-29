@@ -32,7 +32,7 @@ i {
 }
 
 a {
-  color: rgb(250, 214, 96);
+  color: rgba(21, 131, 40, 0.63);
 }
 
 #outer-wrapper {
@@ -40,7 +40,6 @@ a {
   padding: 15px;
   width: 95vw;
   height: 93vh;
-  border-radius: 25px;
   overflow: hidden;
   text-align: center; 
 }
@@ -65,7 +64,7 @@ a {
   width: 90%;
   background-color: rgba(182, 213, 248, 0.308);
   border-radius: 10px;
-  color: #fff;
+   color:rgba(255, 255, 255, 0.85);
   font-size: 0.8em;
   line-height: 1em;
 }
@@ -73,7 +72,6 @@ a {
 .time_zone {
   margin-right: 20px;
 }
-
 
 #quote-wrapper {
   margin: auto;
@@ -102,15 +100,6 @@ a {
   width: 450px;
   }
 
-.image {
-  margin: 50px;
-  padding: 15px;
-  width: 800px;
-  height: 600px;
-  border-radius: 25px;
-  overflow: hidden; 
-}
-
 #utility_wrapper {
   margin: 0 auto;
   width: 90%;
@@ -124,7 +113,7 @@ a {
    
 }
 
-#current, #dosomething {
+#current{
   color: #fff;
   line-height: 1.5em;
   padding-top: 1vh;
@@ -132,11 +121,6 @@ a {
   padding-right: 6px;
   padding-bottom: 1vh;
   font-size: 0.85em;
-}
-
-#dosomething {
-  font-size: 1em;
-  line-height: 2.4em;
 }
 
 #background-box {
@@ -167,6 +151,16 @@ a {
   margin: auto; 
 }
 
+#dosomething {
+  color: #fff;
+  padding-top: 1vh;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-bottom: 1vh;
+  font-size: 1em;
+  line-height: 2.4em;
+}
+
 #library.utility, #background-box.utility, #weather-box.utility {
   float: left;
   display: inline-block;
@@ -186,23 +180,27 @@ a {
 
 .sidenav {
   margin: auto;
-  width: 200px;
+  width: 10%;
   height: 0;
   position: fixed;
   z-index: 1;
   bottom: 100px;
   left: 65%;
-  background-color: rgba(255, 255, 255, 0.705);
-  overflow-y: scroll;
+  background: rgba(255, 255, 255, 0.705); /* For browsers that do not support gradients*/
+  background: linear-gradient(to top, rgba(255, 255, 255, 0),rgba(255, 255, 255, 0.705));
+  overflow-y: hidden;
   transition: 0.5s;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .sidenav a {
-  padding: 10px;
+  padding: 1px;
   text-decoration: none;
   color: #000000;
   display: block;
   transition: 0.3s;
+  font-size: 0.78em;
 }
 
 .sidenav a:hover {
