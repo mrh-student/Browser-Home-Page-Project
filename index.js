@@ -13,8 +13,8 @@ function greet_user() {
   var now = moment().format("HH:mm");
   var morning = "06:00";
   var lunch = "12:00";
-  var afternoon = "14:00";
-  var evening = "19:00";
+  var afternoon = "13:30";
+  var evening = "18:00";
   var night = "22:00";
 
   if (now >= "00:00" && now < morning) {
@@ -28,7 +28,7 @@ function greet_user() {
   } else if (now >= evening && now < night) {
     var greeting = "Good evening, Maria."
   } else if (now >= night && now <= "23:59") {
-    var greeting = "It's getting late."
+    var greeting = "It's getting late, Maria."
   } else {
     var greeting = "Looks like you are traveling outside of time. Or I am experiencing an error. One of the two."
   }
@@ -38,7 +38,7 @@ function greet_user() {
 }
 
 function random_bg(){
-  var bg_images = ["https://i.imgur.com/3Mq9bY2.jpg","http://onlysp.com/wp-content/uploads/2016/07/life-is-strange-chloes-bedroom_1920.0.jpg","https://i.imgur.com/uWRMmLK.jpg","https://images5.alphacoders.com/839/839681.jpg","http://leganerd.com/wp-content/uploads/2013/09/Fantasy-Space-Best-Wallpaper-HD.jpg"]
+  var bg_images = ["images/bg001.jpg","images/bg002.jpg","images/bg003.png","images/bg004.jpg","images/bg005.jpg","images/bg006.jpg", "images/bg007.jpg", "images/bg008.jpg","images/bg009.jpg","images/bg010.jpg"]
 
   var img_pick = _.sample(bg_images);
   var $bg_image = $("#page")
