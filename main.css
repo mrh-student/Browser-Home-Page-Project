@@ -58,6 +58,23 @@ a {
    
 }
 
+#timezone_wrapper {
+  margin: auto;
+  margin-bottom: 5px;
+  padding: 7px;
+  width: 90%;
+  background-color: rgba(182, 213, 248, 0.308);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 0.8em;
+  line-height: 1em;
+}
+
+.time_zone {
+  margin-right: 20px;
+}
+
+
 #quote-wrapper {
   margin: auto;
   margin-bottom: 5px; 
@@ -119,6 +136,7 @@ a {
 
 #dosomething {
   font-size: 1em;
+  line-height: 2.4em;
 }
 
 #background-box {
@@ -155,21 +173,27 @@ a {
   max-height: 70px;
   width: 30%;
   min-width: 150px;
-  margin-right: 10px;
+  margin: auto;
 }
 
+#library.utility {
+  float: right;
+}
 
+#background-box.utility {
+  margin-left: 5%;
+}
 
 .sidenav {
   margin: auto;
-  width: 180px;
+  width: 200px;
   height: 0;
   position: fixed;
   z-index: 1;
   bottom: 100px;
-  left: 60%;
+  left: 65%;
   background-color: rgba(255, 255, 255, 0.705);
-  overflow-y: hidden;
+  overflow-y: scroll;
   transition: 0.5s;
 }
 
@@ -189,6 +213,7 @@ a {
   position: absolute;
   top: 0;
   right: 25px;
+  margin-bottom: 10px;
 }
 
 
