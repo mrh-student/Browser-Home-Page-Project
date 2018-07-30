@@ -87,7 +87,7 @@ function get_quote(){
 } 
 
 function openNav() {
-  document.getElementById("mySidenav").style.height = "300px";
+  document.getElementById("mySidenav").style.height = "450px";
 }
 
 function closeNav() {

@@ -17,6 +17,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.3.0/moment-timezone.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.3.0/moment-timezone-utils.min.js"></script>
     <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="todo.js"></script>
   </head>
   <body onload="start();">
   <div id="outer-wrapper">
@@ -46,12 +47,22 @@
             <span style="cursor:pointer" onclick="openNav()">&#9776; To Do</span>
             <div id="mySidenav" class="sidenav">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <a href="https://soundcloud.com/momothesheep" target=_blank>Soundcloud</a>
-                <a href="#" target=_blank>Services</a>
-                <a href="#" target=_blank>Clients</a>
-                <a href="#" target=_blank>Contact</a>
-                <a href="#" target=_blank>Contact</a>
-                <a href="#" target=_blank>Contact</a>
+                <div id="todo_header" class="header">
+                  <h2>To Do List</h2>
+                  <input type="text" id="myInput" placeholder="New To Do...">
+                  <span onclick="newElement()" class="addBtn">Add</span>
+                </div>
+                <ul id="myUL">
+                </ul>
+                <script>
+                  /* strike through clicked to dos, will load to early if included in separate js file */
+                  var list = document.querySelector('ul');
+                  list.addEventListener('click', function(ev) {
+                    if (ev.target.tagName === 'LI') {
+                      ev.target.classList.toggle('checked');
+                    }
+                  }, false);
+                </script>
             </div>
           </div>
         </div>
