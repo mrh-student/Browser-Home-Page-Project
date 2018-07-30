@@ -42,7 +42,7 @@ function random_bg(){
 
   var img_pick = _.sample(bg_images);
   var $bg_image = $("#page")
-  $bg_image.html("<link href='main.css' rel='stylesheet' type='text/css' /><style> html {background: url("+img_pick+") no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}</style>")  
+  $bg_image.append("<style> html {background: url("+img_pick+") no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}</style>")  
   
 }
 
