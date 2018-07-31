@@ -11,6 +11,8 @@ window.onload=function(){
   }
 }
 
+var todos = [];
+
 // Click on a close button to hide the current list item
 var close = document.getElementsByClassName("close");
 var i;
@@ -31,20 +33,22 @@ function newElement() {
     alert("You must write something!");
   } else {
     document.getElementById("myUL").appendChild(li);
+    // Add input to array
+    todos.push({inputValue});
+    console.log(todos);
   }
   document.getElementById("myInput").value = "";
-
   var span = document.createElement("SPAN");
   var txt = document.createTextNode("\u00D7");
   span.className = "close";
   span.appendChild(txt);
   li.appendChild(span);
-
+  
   for (i = 0; i < close.length; i++) {
     close[i].onclick = function() {
       var div = this.parentElement;
       div.style.display = "none";
     }
   }
-}
 
+}
