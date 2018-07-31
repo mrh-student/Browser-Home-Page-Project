@@ -3,6 +3,7 @@ After using the (free) Momentum browser home page for a while, I wanted to creat
 This is an ongoing project, also used to try out new techniques from coding courses.<br><br>
 I am currently running the page locally as the default browser home page / new tab page. Everything is customised to my location, name etc., instructions on where to make customisation changes included below.
 
+<img src="images/screenshot.png" width="800px">
 
 #### Techniques used:
 HTML, CSS, JavaScript
