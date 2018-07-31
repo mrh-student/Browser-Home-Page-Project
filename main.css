@@ -38,6 +38,11 @@ i {
   font-family: 'Droid Serif', serif;
 }
 
+#date {
+  color: rgba(255, 255, 255, 0.623);
+  margin: 3px;
+}
+
 #outer-wrapper {
   margin: auto;
   padding: 15px;

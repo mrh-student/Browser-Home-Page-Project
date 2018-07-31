@@ -49,9 +49,66 @@ function startTime() {
     var today = new Date();
     var h = today.getHours();
     var m = today.getMinutes();
+    var d = today.getDay();
+    var y = today.getFullYear();
+    var dd = today.getDate();
+    var mo =today.getUTCMonth();
     h = checkTime(h);
     m = checkTime(m);
+
+    if (d == 1){
+      var day = "Monday";
+    } else if (d == 2){
+      var day = "Tuesday";
+    } else if (d == 3){
+      var day = "Wednesday";
+    } else if (d == 4){
+      var day = "Thursday";
+    } else if (d == 5){
+      var day = "Friday";
+    } else if (d == 6){
+      var day = "Saturday";
+    } else if (d == 0){
+      var day = "Sunday";
+    }
+
+    if (mo == 0){
+      var month = "January";
+    } else if (mo == 1){
+      var month = "February";
+    } else if (mo == 2){
+      var month = "March";
+    } else if (mo == 3){
+      var month = "April";
+    } else if (mo == 4){
+      var month = "May";
+    } else if (mo == 5){
+      var month = "June";
+    } else if (mo == 6){
+      var month = "July";
+    } else if (mo == 7){
+      var month = "August";
+    } else if (mo == 8){
+      var month = "September";
+    } else if (mo == 9){
+      var month = "October";
+    } else if (mo == 10){
+      var month = "November";
+    } else if (mo == 11){
+      var month = "December";
+    }
+
+
+    if (dd == 1 || dd == 21 || dd == 31){
+      var date_suffix = "st";
+    } else if (dd == 2 || dd == 22) {
+      var date_suffix = "nd";
+    } else {
+      var date_suffix = "th"
+    }
+
     document.getElementById("clock").innerHTML = h + ":" + m;
+    document.getElementById("date").innerHTML = day + ", "+month+" "+dd+date_suffix+" "+y;
     var t = setTimeout(startTime, 500);
 }
 
@@ -78,7 +135,7 @@ function give_temp(temp, cloudiness){
 }
 
 function get_quote(){
-  var quotes = ["<h3>The fear of death follows from the fear of life. One who lives life fully is prepared to die at any time.</h3><br><i>Mark Twain</i>","<h3>Idealistic as it may sound, altruism should be the driving force in business, not just competition and a desire for wealth.</h3><br><i>Dalai Lama</i>","<h3>The best teachers are those who show you where to look, but don't tell you what to see.</h3><br><i>Alexandra K. Trenfor</i>","<h3>Sitting quietly, doing nothing, spring comes, and the grass grows by itself.</h3><br><i>Zenrin Kushû</i>","<h3>People do not seem to realize that their opinion of the world is also a confession of character.</h3><br><i>Ralph Waldo Emerson</i>","<h3>The problem is not the problem. The problem is your attitude about the problem.</h3><br><i>Captain Jack Sparrow</i>","<h3>It is the unknown we fear when we look upon death and darkness, nothing more.</h3><br><i>Albus Dumbledore</i>", "<h3>Denjetzigen Moment langt</h3><br><i>Unknown</i>"]
+  var quotes = ["<h3>The fear of death follows from the fear of life. One who lives life fully is prepared to die at any time.</h3><br><i>Mark Twain</i>","<h3>Idealistic as it may sound, altruism should be the driving force in business, not just competition and a desire for wealth.</h3><br><i>Dalai Lama</i>","<h3>The best teachers are those who show you where to look, but don't tell you what to see.</h3><br><i>Alexandra K. Trenfor</i>","<h3>Sitting quietly, doing nothing, spring comes, and the grass grows by itself.</h3><br><i>Zenrin Kushû</i>","<h3>People do not seem to realize that their opinion of the world is also a confession of character.</h3><br><i>Ralph Waldo Emerson</i>","<h3>The problem is not the problem. The problem is your attitude about the problem.</h3><br><i>Captain Jack Sparrow</i>","<h3>It is the unknown we fear when we look upon death and darkness, nothing more.</h3><br><i>Albus Dumbledore</i>", "<h3>Denjetzigen Moment langt</h3><br><i>Unknown</i>", "<h3>Don't compromise yourself. You are everything you've got.</h3><br><i>Janis Joplin</i>"]
 
   var pick = _.sample(quotes);
   var $quote = $("#quote");
@@ -91,12 +148,6 @@ function openNav() {
 
 function closeNav() {
   document.getElementById("mySidenav").style.height = "0";
-}
-
-function give_quote() {
-  var quotes = ["<h3>The fear of death follows from the fear of life. One who lives life fully is prepared to die at any time.</h3><br><i>Mark Twain</i>","<h3>Idealistic as it may sound, altruism should be the driving force in business, not just competition and a desire for wealth.</h3><br><i>Dalai Lama</i>","<h3>The best teachers are those who show you where to look, but don't tell you what to see.</h3><br><i>Alexandra K. Trenfor</i>","<h3>Sitting quietly, doing nothing, Spring comes, and the grass grows by itself.</h3><br><i>Zenrin Kushû</i>","<h3>People do not seem to realize that their opinion of the world is also a confession of character.</h3><br><i>Ralph Waldo Emerson</i>","<h3>The problem is not the problem. The problem is your attitude about the problem.</h3><br><i>Captain Jack Sparrow</i>","<h3>It is the unknown we fear when we look upon death and darkness, nothing more.</h3><br><i>Albus Dumbledore</i>", "<h3>Denjetzigen Moment langt</h3><br><i>Unknown</i>"]
-  var randomnumber = Math.floor(Math.random() * (quotes.length));
-  document.getElementById("#quote").innerHTML = quotes[randomnumber];
 }
 
 function get_times() {
