@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html manifest="example.appcache">
+<html>
   <head id="page">
     <meta charset="utf-8">
     <link rel="icon" href="images/icon2.png" type="image/png" />
@@ -9,16 +9,15 @@
     <link href="main.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://underscorejs.org/underscore-min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/locales.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.3.0/moment-timezone.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.3.0/moment-timezone-utils.min.js"></script>
-    <script type="text/javascript" src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
-    <script type="text/javascript" src="index.js"></script>
-    <script type="text/javascript" src="todo.js"></script>
+    <script type="text/javascript" src="node_modules/requirejs/require.js"></script>
+    <script type="text/javascript" src="scripts/todo.js"></script> 
+    <script type="text/javascript" src="scripts/index.js"></script>
+    
   </head>
   <body onload="start();">
     <div id="outer-wrapper">
@@ -79,6 +78,6 @@
         <span><input type="hidden" name="sitesearch"/></span>
       </form>
     </div>
-    </div>
+    </div> 
   </body>
 </html>

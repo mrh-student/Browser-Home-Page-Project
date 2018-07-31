@@ -7,7 +7,6 @@ function start() {
   get_times();
   worldclock();
 }
-window.onload = start;
 
 function greet_user() {
   var now = moment().format("HH:mm");

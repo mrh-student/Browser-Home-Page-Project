@@ -11,7 +11,7 @@ window.onload=function(){
   }
 }
 
-var todos = [];
+var todos = { "todo_events" : []};
 
 // Click on a close button to hide the current list item
 var close = document.getElementsByClassName("close");
@@ -34,8 +34,9 @@ function newElement() {
   } else {
     document.getElementById("myUL").appendChild(li);
     // Add input to array
-    todos.push({inputValue});
+    todos.todo_events.push({inputValue});
     console.log(todos);
+    var json = JSON.stringify(todos);
   }
   document.getElementById("myInput").value = "";
   var span = document.createElement("SPAN");
@@ -52,3 +53,4 @@ function newElement() {
   }
 
 }
+
