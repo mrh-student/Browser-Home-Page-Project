@@ -17,6 +17,11 @@ To update info, just edit `config.json` or use `setup.html` to create a new conf
 #### Techniques used:
 HTML, CSS, JavaScript
 
+#### Tested in:
+
+- Chrome
+- Firefox
+
 #### Features:
 
 - Random screen filling background image
