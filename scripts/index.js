@@ -4,16 +4,22 @@ function start() {
   var user_name = config_data[0].user_name;
   var location = config_data[0].weather_location;
   var openweatherAPI = config_data[0].openweatherAPI;
-  // display user name
-  document.getElementById("name").innerHTML=user_name;
-  // start site widgets
-  greet_user(user_name);
-  random_bg();
-  startTime();
-  get_weather_open(location,openweatherAPI);
-  get_quote();
-  get_times();
-  worldclock();
+
+  if(user_name == "Jane Doe"){
+    window.open ('setup.html','_self',false)
+  } else {
+    // display user name
+    document.getElementById("name").innerHTML=user_name+".";
+    // start site widgets
+    greet_user(user_name);
+    random_bg();
+    startTime();
+    get_weather_open(location,openweatherAPI);
+    get_quote();
+    get_times();
+    worldclock();
+  }
+  
 }
 
 function greet_user(user_name) {
@@ -23,7 +29,6 @@ function greet_user(user_name) {
   var afternoon = "13:30";
   var evening = "18:00";
   var night = "22:00";
-  var greeting_name = user_name;
 
   if (now >= "00:00" && now < morning) {
     var greeting = "Good night, "
