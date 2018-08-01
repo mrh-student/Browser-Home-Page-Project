@@ -2,7 +2,7 @@ function start() {
   greet_user();
   random_bg();
   startTime();
-  get_weather();
+  get_weather_open();
   get_quote();
   get_times();
   worldclock();
@@ -127,11 +127,29 @@ function get_weather (){
   var t = setTimeout(get_weather, 900000);
 }
 
+function get_weather_open(){
+  var url = "http://api.openweathermap.org/data/2.5/weather?q=cork,ie&appid=37cc90f9dc2d284a03cdf9d320e132e5";
+  $.getJSON(url, function(data){
+    var temp_k = data.main.temp;
+    var temp = temp_k - 273.15;
+    var condition = data.weather[0].description;
+    give_temp_open(temp, condition);
+  });
+  var t = setTimeout(get_weather_open,900000)
+}
+
 function give_temp(temp, cloudiness){
   var now = new Date();
   var $current = $("#current");
   $current.html("Cork City<br>It's " + temp + "°C with " + cloudiness);
   console.log(now + " - Cork City - It's " + temp + "°C with " + cloudiness)
+}
+
+function give_temp_open(temp, condition){
+  var now = new Date();
+  var $current = $("#current");
+  $current.html("Cork City<br>It's " + temp + "°C with " + condition);
+  console.log(now + " - Cork City - It's " + temp + "°C with " + condition)
 }
 
 function get_quote(){
