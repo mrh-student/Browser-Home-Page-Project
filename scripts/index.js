@@ -131,7 +131,7 @@ function get_weather_open(){
   var url = "http://api.openweathermap.org/data/2.5/weather?q=cork,ie&appid=37cc90f9dc2d284a03cdf9d320e132e5";
   $.getJSON(url, function(data){
     var temp_k = data.main.temp;
-    var temp = temp_k - 273.15;
+    var temp = Math.round(temp_k - 273.15);
     var condition = data.weather[0].description;
     give_temp_open(temp, condition);
   });
