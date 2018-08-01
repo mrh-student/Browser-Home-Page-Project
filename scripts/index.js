@@ -120,6 +120,8 @@ function startTime() {
       var date_suffix = "st";
     } else if (dd == 2 || dd == 22) {
       var date_suffix = "nd";
+    } else if(dd==3 || dd == 23) {
+      var date_suffix ="rd"
     } else {
       var date_suffix = "th"
     }
