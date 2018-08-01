@@ -7,11 +7,11 @@ I am currently running the page locally as the default browser home page / new t
 #### Install
 <p>To customise, the page needs your name, your location (for weather) and an <a href="https://openweathermap.org/appid#get">API key from openweathermap</a> (free option available). No affiliation, I just liked their weather data output the best.</p>
 
-You can enter this information directly in `config.json` or open `setup.html` to create new configuration file.
+You can enter this information directly in `config.json` or open `setup.html` to create new configuration file. (`setup.html` will open automatically if you are running `index.html` with the default, unedited `config.json` file.)
 <p>Other customisation options not included in setup are described below.</p>
 <p>Once the page is customised to you, you can set it as the default home page / new tab page of your browser. No need to upload to a webspace, it can just run locally.</p>
 
-To update info, just edit `config.json` or use `setup.html` to create a new configuration file.
+To update info, just edit `config.json` or use `setup.html` to create a new configuration file. 
 
 
 #### Techniques used:
