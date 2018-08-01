@@ -1,38 +1,46 @@
 function start() {
-  greet_user();
+  // read config.json to get user info
+  var config_data = JSON.parse(user);
+  var user_name = config_data[0].user_name;
+  var location = config_data[0].weather_location;
+  var openweatherAPI = config_data[0].openweatherAPI;
+  // display user name
+  document.getElementById("name").innerHTML=user_name;
+  // start site widgets
+  greet_user(user_name);
   random_bg();
   startTime();
-  get_weather_open();
+  get_weather_open(location,openweatherAPI);
   get_quote();
   get_times();
   worldclock();
 }
 
-function greet_user() {
+function greet_user(user_name) {
   var now = moment().format("HH:mm");
   var morning = "06:00";
   var lunch = "12:00";
   var afternoon = "13:30";
   var evening = "18:00";
   var night = "22:00";
+  var greeting_name = user_name;
 
   if (now >= "00:00" && now < morning) {
-    var greeting = "Good night, Maria."
+    var greeting = "Good night, "
   } else if (now >= morning && now < lunch) {
-    var greeting = "Good morning, Maria."
+    var greeting = "Good morning, "
   } else if (now >= lunch && now < afternoon) {
-    var greeting = "Happy lunch time, Maria."
+    var greeting = "Happy lunch time, "
   } else if (now >= afternoon && now < evening) {
-    var greeting = "Good afternoon, Maria."
+    var greeting = "Good afternoon, "
   } else if (now >= evening && now < night) {
-    var greeting = "Good evening, Maria."
+    var greeting = "Good evening, "
   } else if (now >= night && now <= "23:59") {
-    var greeting = "It's getting late, Maria."
+    var greeting = "It's getting late, "
   } else {
-    var greeting = "Looks like you are traveling outside of time. Or I am experiencing an error. One of the two."
+    var greeting = "Hello,  "
   }
-  var $greeting = $("#greeting");
-  $greeting.html(greeting);
+  document.getElementById("greeting").innerHTML=greeting;
   t = setTimeout(greet_user, 1000)
 }
 
@@ -127,8 +135,8 @@ function get_weather (){
   var t = setTimeout(get_weather, 900000);
 }
 
-function get_weather_open(){
-  var url = "http://api.openweathermap.org/data/2.5/weather?q=cork,ie&appid=37cc90f9dc2d284a03cdf9d320e132e5";
+function get_weather_open(location,openweatherAPI){
+  var url = "http://api.openweathermap.org/data/2.5/weather?q="+location+"&appid="+openweatherAPI;
   $.getJSON(url, function(data){
     var temp_k = data.main.temp;
     var temp = Math.round(temp_k - 273.15);
@@ -147,8 +155,10 @@ function give_temp(temp, cloudiness){
 
 function give_temp_open(temp, condition){
   var now = new Date();
+  var config_data = JSON.parse(user);
+  var location = config_data[0].weather_location;
   var $current = $("#current");
-  $current.html("Cork City<br>It's " + temp + "°C with " + condition);
+  $current.html(location+"<br>It's " + temp + "°C with " + condition);
   console.log(now + " - Cork City - It's " + temp + "°C with " + condition)
 }
 
@@ -229,8 +239,6 @@ function worldclock() {
   document.getElementById("melbourne").innerHTML = "Melbourne: " + Melbourne;
   var t = setTimeout(worldclock, 500);
 }
-
-
 
   
 

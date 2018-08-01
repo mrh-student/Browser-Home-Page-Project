@@ -8,7 +8,7 @@ I am currently running the page locally as the default browser home page / new t
 #### Techniques used:
 HTML, CSS, JavaScript
 
-### Features:
+#### Features:
 
 - Random screen filling background image
 
