@@ -1,4 +1,7 @@
 function dosomething(){
+    document.getElementById("error_message").innerHTML = "";
+    document.getElementById("greeting").innerHTML = "";
+    document.getElementById("weather").innerHTML = "";
     var name = document.getElementById('user_name').value;
     var location = document.getElementById('user_location').value;
     var APIkey = document.getElementById('APIkey').value;
@@ -17,18 +20,27 @@ function dosomething(){
             var temp = Math.round(temp_k - 273.15);
             var condition = data.weather[0].description;
             console.log(temp+" "+condition);
-            give_temp(temp, condition, location); 
-
+            give_temp(temp, condition, location);
+            document.getElementById("check").innerHTML= "<span>Does that look good to you?</span><br><br><input type='button' id='save' class='button' value='Yes, save.' onclick='save_config();'/>"; 
         }).fail(function(jqXHR){
             if (jqXHR.status == 404) {
-                alert("404 - Location Not Found");
+                var fail_message = "Error 404 - City not found. Check the spelling or choose a different location.";
+                document.getElementById("error_message").innerHTML = fail_message;
+                document.getElementById("check").innerHTML= "";
+                //alert(fail_message);
             } else if(jqXHR.status == 401){
-                alert("401 - access denied, check your API key");
+                var fail_message = "Error:401 - Access denied. Check that you have entered a valid API key.";
+                document.getElementById("error_message").innerHTML = fail_message;
+                document.getElementById("check").innerHTML= "";
+                //alert(fail_message);
             } else {
-                alter("other error");
+                var fail_message = "An unknown error occurred. Please try again.";
+                document.getElementById("error_message").innerHTML = fail_message;
+                document.getElementById("check").innerHTML="";
+                //alert(fail_message);
             }
         });
-        document.getElementById("check").innerHTML= "<span>Does that look correct to you?</span><br><br><input type='button' id='save' class='button' value='Yes, save.' onclick='save_config();'/>";
+        
     }
 }
 function give_temp(temp, condition, location){
@@ -37,7 +49,7 @@ function give_temp(temp, condition, location){
 }
 
 function give_greeting(name){
-    document.getElementById("greeting").innerHTML = "Hello, "+ name ;
+    document.getElementById("greeting").innerHTML = "Hi there "+ name ;
     //console.log(name)
 }
 
@@ -71,7 +83,8 @@ function save_config(){
     }
     download(new_config_data, 'config.json', 'application/json');
 
-    document.getElementById("next").innerHTML = "Make sure the downloaded file is named 'config.json' and place it in the same folder as index.html<br>Overwrite any older files if they exist.<br><br><input type='button' class='button' value='Done! Take me to my home page' onclick='take_me_home();' />"
+    document.getElementById("next").innerHTML = "Make sure the downloaded file is named 'config.json' and place it in the same folder as index.html<br>Overwrite any older files if they exist.<br><br><input type='button' class='button' value='Done! Take me to my home page' onclick='take_me_home();' />";
+    document.getElementById("save").value = "Download again";
 }
 
 function take_me_home() {

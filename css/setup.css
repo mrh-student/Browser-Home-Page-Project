@@ -42,9 +42,10 @@ div {
 }
 
 #error_message {
-    color: red;
+    color: rgb(199, 18, 18);
     font-size: 0.8em;
-    margin: 0px 10px 10px; 
+    margin: 0px 10px 10px;
+    background-color: rgba(236, 236, 16, 0.507); 
 }
 
 .button {

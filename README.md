@@ -56,6 +56,30 @@ HTML, CSS, JavaScript
 
 #### Notes:
 
-index.js is referencing `images/bg001.jpg` - `images/bg010.jpg`<br>
-The images are not included in the repository, but you can replace them with your own in the images folder<br>
-Images are set in `random_bg()` function
+index.js is referencing `images/bg001.jpg` - `images/bg011.jpg`<br>
+Example images are included in the repository, but you can replace them with your own in the images folder<br>
+Images are set in `random_bg()` function<br>
+<p>Example image sources: 
+Free to use
+
+https://www.pexels.com/photo/adventure-alps-background-beautiful-547114/
+
+https://www.pexels.com/photo/blue-and-purple-cosmic-sky-956999/
+
+https://images.pexels.com/photos/808465/pexels-photo-808465.jpeg?cs=srgb&dl=background-boardwalk-clouds-808465.jpg&fm=jpg
+
+https://www.pexels.com/photo/background-balance-beach-boulder-289586/
+
+https://www.pexels.com/photo/abendstimmung-atmospheric-background-beautiful-531872/
+
+https://www.pexels.com/photo/yellow-bokeh-photo-949587/
+
+https://www.pexels.com/photo/astronomy-background-constellation-cosmic-355887/
+
+https://www.pexels.com/photo/abstract-background-beach-color-355288/
+
+https://www.pexels.com/photo/scenic-view-of-the-mountain-733031/
+
+https://www.pexels.com/photo/adventure-alpine-background-black-and-white-355770/
+
+https://www.pexels.com/photo/black-and-white-gray-long-road-3131/</p>
