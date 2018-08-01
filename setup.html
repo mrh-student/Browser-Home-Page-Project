@@ -140,7 +140,11 @@
             }
             download(new_config_data, 'config.json', 'application/json');
 
-            document.getElementById("next").innerHTML = "Make sure the downloaded file is named 'config.json' and place it in the same folder as index.html<br>Overwrite any older files if they exist."
+            document.getElementById("next").innerHTML = "Make sure the downloaded file is named 'config.json' and place it in the same folder as index.html<br>Overwrite any older files if they exist.<br><br><input type='button' value='Done! Take me to my home page' onclick='take_me_home();' />"
+        }
+
+        function take_me_home() {
+            window.open ('index.html','_self',false);
         }
 
     </script>
