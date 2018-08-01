@@ -22,6 +22,10 @@ function start() {
   
 }
 
+function set_me_up(){
+  window.open ('setup.html','_self',false);
+}
+
 function greet_user(user_name) {
   var now = moment().format("HH:mm");
   var morning = "06:00";
@@ -50,7 +54,7 @@ function greet_user(user_name) {
 }
 
 function random_bg(){
-  var bg_images = ["images/bg001.jpg","images/bg002.jpg","images/bg003.png","images/bg004.jpg","images/bg005.jpg","images/bg006.jpg", "images/bg007.jpg", "images/bg008.jpg","images/bg009.jpg","images/bg010.jpg"]
+  var bg_images = ["images/bg001.jpg","images/bg002.jpg","images/bg003.png","images/bg004.jpg","images/bg005.jpg","images/bg006.jpg", "images/bg007.jpg", "images/bg008.jpg","images/bg009.jpg","images/bg010.jpg","images/bg011.jpg"]
 
   var img_pick = _.sample(bg_images);
   var $bg_image = $("#page")
