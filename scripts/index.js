@@ -150,7 +150,7 @@ function get_weather_open(location,openweatherAPI){
   var config_data = JSON.parse(user);
   var location = config_data[0].weather_location;
   var openweatherAPI = config_data[0].openweatherAPI;
-  var url = "http://api.openweathermap.org/data/2.5/weather?q="+location+"&appid="+openweatherAPI;
+  var url = "https://api.openweathermap.org/data/2.5/weather?q="+location+"&appid="+openweatherAPI;
   $.getJSON(url, function(data){
     var temp_k = data.main.temp;
     var temp = Math.round(temp_k - 273.15);
