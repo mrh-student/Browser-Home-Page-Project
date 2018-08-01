@@ -13,7 +13,7 @@ function dosomething(){
         console.log(error_message);
     } else {
         give_greeting(name);
-        var url = "http://api.openweathermap.org/data/2.5/weather?q="+location+"&appid="+APIkey;
+        var url = "https://api.openweathermap.org/data/2.5/weather?q="+location+"&appid="+APIkey;
         $.getJSON(url, function(data){
             var temp_k = data.main.temp;
             var temp_k = data.main.temp;
