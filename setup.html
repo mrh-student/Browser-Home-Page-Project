@@ -6,17 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Set Up</title>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="node_modules/requirejs/require.js"></script>
     <script type="text/javascript" src="config.json"></script>
     <style>
+        html {
+            background: url("images/bg007.jpg") no-repeat center center fixed;
+             -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
         body {
-            background-color: aquamarine;
             font-family: 'Lato', sans-serif;
         }
 
         header, main {
             margin: auto;
             width: 50%;
+        }
+
+        header {
+            text-align: center;
+            color:rgba(255, 255, 255, 0.596);
         }
 
         section {
@@ -40,6 +50,26 @@
         div {
             margin: 5px;
         }
+
+        #error_message {
+            color: red;
+            font-size: 0.8em;
+            margin: 0px 10px 10px; 
+        }
+
+        .button {
+            background-color: rgba(106, 190, 113, 0.568);
+            border: none;
+            color: white;
+            padding: 5px 7px;
+            text-align: center;
+            text-decoration: none;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.8em;
+            margin: 0;
+            cursor: pointer;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body onload="read_config();">
@@ -53,6 +83,7 @@
         </section>
         <section>
             <span><h3>Update configuration:</h3></span><br>
+            <span id="error_message"></span>
             <table>
                 <tr>
                     <td><span>Your name:</span></td>
@@ -68,7 +99,7 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input type="button" value="Go" onclick="dosomething();"/></td>
+                    <td><input type="button" class="button" value="Go" onclick="dosomething();"/></td>
                 </tr>
             </table>
             <p>Note: You can also open config.json and make the changes in the file directly. 
@@ -89,27 +120,43 @@
             var name = document.getElementById('user_name').value;
             var location = document.getElementById('user_location').value;
             var APIkey = document.getElementById('APIkey').value;
-            console.log(name + location);
-            give_greeting(name);
-            document.getElementById("check").innerHTML= "<span>Does that look correct to you?</span><br><br><input type='button' id='save' value='Yes, save.' onclick='save_config();'/>";
+            // console.log(name + location);
+            
+            if(name =="" || location =="" || APIkey ==""){
+                var error_message = "Whoops - Please fill out all the fields below and try again.";
+                document.getElementById("error_message").innerHTML = error_message;
+                console.log(error_message);
+            } else {
+                give_greeting(name);
+                var url = "http://api.openweathermap.org/data/2.5/weather?q="+location+"&appid="+APIkey;
+                $.getJSON(url, function(data){
+                    var temp_k = data.main.temp;
+                    var temp_k = data.main.temp;
+                    var temp = Math.round(temp_k - 273.15);
+                    var condition = data.weather[0].description;
+                    console.log(temp+" "+condition);
+                    give_temp(temp, condition, location); 
 
-            var url = "http://api.openweathermap.org/data/2.5/weather?q="+location+"&appid="+APIkey;
-            $.getJSON(url, function(data){
-                var temp_k = data.main.temp;
-                var temp = Math.round(temp_k - 273.15);
-                var condition = data.weather[0].description;
-                console.log(temp+" "+condition);
-                give_temp(temp, condition, location);
-            });
+                }).fail(function(jqXHR){
+                    if (jqXHR.status == 404) {
+                        alert("404 - Location Not Found");
+                    } else if(jqXHR.status == 401){
+                        alert("401 - access denied, check your API key");
+                    } else {
+                        alter("other error");
+                    }
+                });
+                document.getElementById("check").innerHTML= "<span>Does that look correct to you?</span><br><br><input type='button' id='save' class='button' value='Yes, save.' onclick='save_config();'/>";
+            }
         }
         function give_temp(temp, condition, location){
             document.getElementById("weather").innerHTML = "It's " + temp + "°C in " + location + " with " + condition ;
-            console.log(temp, condition)
+            //console.log(temp, condition)
         }
 
         function give_greeting(name){
             document.getElementById("greeting").innerHTML = "Hello, "+ name ;
-            console.log(name)
+            //console.log(name)
         }
 
         function read_config(){
@@ -117,8 +164,8 @@
             var user_name = config_data[0].user_name;
             var location = config_data[0].weather_location;
             var openweatherAPI = config_data[0].openweatherAPI;
-            console.log(user_name+  location)
-            document.getElementById("read").innerHTML = "User name: "+user_name+" <br> Location for weather: "+location+"<br> openweathermap API key: "+ openweatherAPI;
+            //console.log(user_name+  location)
+            document.getElementById("read").innerHTML = "<table cellpadding='10'><tr><td><strong>User name:</strong></td><td>"+user_name+"</td></tr><tr><td><strong>Location for weather:</strong></td><td>"+location+"</td></tr><tr><td><strong>openweathermap API key:</strong></td><td>"+ openweatherAPI+"</td></tr></table>";
         }
 
         function save_config(){
@@ -140,7 +187,7 @@
             }
             download(new_config_data, 'config.json', 'application/json');
 
-            document.getElementById("next").innerHTML = "Make sure the downloaded file is named 'config.json' and place it in the same folder as index.html<br>Overwrite any older files if they exist.<br><br><input type='button' value='Done! Take me to my home page' onclick='take_me_home();' />"
+            document.getElementById("next").innerHTML = "Make sure the downloaded file is named 'config.json' and place it in the same folder as index.html<br>Overwrite any older files if they exist.<br><br><input type='button' class='button' value='Done! Take me to my home page' onclick='take_me_home();' />"
         }
 
         function take_me_home() {

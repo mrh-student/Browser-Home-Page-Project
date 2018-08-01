@@ -5,7 +5,7 @@ function start() {
   var location = config_data[0].weather_location;
   var openweatherAPI = config_data[0].openweatherAPI;
 
-  if(user_name == "Jane Doe"){
+  if(user_name == "Jane Doe" && location == "New York" && openweatherAPI == ""){
     window.open ('setup.html','_self',false)
   } else {
     // display user name
@@ -141,6 +141,9 @@ function get_weather (){
 }
 
 function get_weather_open(location,openweatherAPI){
+  var config_data = JSON.parse(user);
+  var location = config_data[0].weather_location;
+  var openweatherAPI = config_data[0].openweatherAPI;
   var url = "http://api.openweathermap.org/data/2.5/weather?q="+location+"&appid="+openweatherAPI;
   $.getJSON(url, function(data){
     var temp_k = data.main.temp;
