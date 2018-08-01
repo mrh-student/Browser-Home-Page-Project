@@ -1,4 +1,4 @@
-# Browser Home Page
+# HomeTab
 After using the (free) Momentum browser home page for a while, I wanted to create my own to be able to personalise it more. 
 This is an ongoing project, also used to try out new techniques from coding courses.<br><br>
 I am currently running the page locally as the default browser home page / new tab page.<br>
@@ -82,4 +82,15 @@ https://www.pexels.com/photo/scenic-view-of-the-mountain-733031/
 
 https://www.pexels.com/photo/adventure-alpine-background-black-and-white-355770/
 
-https://www.pexels.com/photo/black-and-white-gray-long-road-3131/</p>
+https://www.pexels.com/photo/black-and-white-gray-long-road-3131/
+
+https://www.pexels.com/photo/classic-blue-coupe-die-cast-model-1037995/
+
+https://www.pexels.com/photo/body-of-water-with-mountains-on-side-937782/
+
+https://www.pexels.com/photo/layout-of-green-leaves-1227648/
+
+https://www.pexels.com/photo/snow-top-mountain-under-clear-sky-1054218/
+
+
+</p>
