@@ -25,6 +25,7 @@ HTML, CSS, JavaScript
 
 - Chrome
 - Firefox
+- Safari
 
 #### Features:
 
