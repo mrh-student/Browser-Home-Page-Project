@@ -1,17 +1,27 @@
+ 
+
 function start() {
   // read config.json to get user info
-  var config_data = JSON.parse(user);
-  var user_name = config_data[0].user_name;
-  var location = config_data[0].weather_location;
-  var openweatherAPI = config_data[0].openweatherAPI;
+  //var config_data = JSON.parse(user);
 
-  if(user_name == "Jane Doe" && location == "New York" && openweatherAPI == "2b19e11e5e6f2f6b45e767ed1f96d3fb"){
+  //var user = {"user_name":"Maria","weather_location":"Cork","openweatherAPI":"37cc90f9dc2d284a03cdf9d320e132e5"};
+  //var user = user_stored;
+  var user_stored = localStorage.getItem("ConfigLocalStorage");
+  if (user_stored === ""){
     window.open ('setup.html','_self',false)
   } else {
+    var user = JSON.parse(user_stored);
+    console.log(user_stored);
+    console.log(user);
+
+    var user_name = user.user_name;
+    var location = user.weather_location;
+    var openweatherAPI = user.openweatherAPI;
+    console.log(user_name + location + openweatherAPI);
     // display user name
     document.getElementById("name").innerHTML=user_name+".";
     // start site widgets
-    greet_user(user_name);
+    greet_user();
     random_bg();
     startTime();
     get_weather_open(location,openweatherAPI);
@@ -26,7 +36,7 @@ function set_me_up(){
   window.open ('setup.html','_self',false);
 }
 
-function greet_user(user_name) {
+function greet_user() {
   var now = moment().format("HH:mm");
   var morning = "06:00";
   var lunch = "12:00";
@@ -147,10 +157,13 @@ function get_weather (){
 }
 
 function get_weather_open(location,openweatherAPI){
-  var config_data = JSON.parse(user);
-  var location = config_data[0].weather_location;
-  var openweatherAPI = config_data[0].openweatherAPI;
+  //var config_data = JSON.parse(user);
+  var user_stored = localStorage.getItem("ConfigLocalStorage");
+  var user = JSON.parse(user_stored);
+  var location = user.weather_location;
+  var openweatherAPI = user.openweatherAPI;
   var url = "https://api.openweathermap.org/data/2.5/weather?q="+location+"&appid="+openweatherAPI;
+  console.log(url);
   $.getJSON(url, function(data){
     var temp_k = data.main.temp;
     var temp = Math.round(temp_k - 273.15);
@@ -169,11 +182,12 @@ function give_temp(temp, cloudiness){
 
 function give_temp_open(temp, condition){
   var now = new Date();
-  var config_data = JSON.parse(user);
-  var location = config_data[0].weather_location;
+  var user_stored = localStorage.getItem("ConfigLocalStorage");
+  var user = JSON.parse(user_stored);
+  var location = user.weather_location;
   var $current = $("#current");
   $current.html(location+"<br>It's " + temp + "°C with " + condition);
-  console.log(now + " - Cork City - It's " + temp + "°C with " + condition)
+  console.log(now + " - "+location+" - It's " + temp + "°C with " + condition)
 }
 
 function get_quote(){

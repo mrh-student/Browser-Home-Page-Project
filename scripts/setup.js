@@ -54,10 +54,13 @@ function give_greeting(name){
 }
 
 function read_config(){
-    var config_data = JSON.parse(user);
-    var user_name = config_data[0].user_name;
-    var location = config_data[0].weather_location;
-    var openweatherAPI = config_data[0].openweatherAPI;
+    //var user = {"user_name":"Maria","weather_location":"Cork","openweatherAPI":"37cc90f9dc2d284a03cdf9d320e132e5"}
+    //var config_data = JSON.parse(user);
+    var user_stored = localStorage.getItem("ConfigLocalStorage");
+    var user = JSON.parse(user_stored);
+    var user_name = user.user_name;
+    var location = user.weather_location;
+    var openweatherAPI = user.openweatherAPI;
     //console.log(user_name+  location)
     document.getElementById("read_name").innerHTML = user_name;
     document.getElementById("read_location").innerHTML = location;
@@ -65,23 +68,26 @@ function read_config(){
 }
 
 function save_config(){
-    var config_data = JSON.parse(user);
+    var user = {"user_name":"","weather_location":"","openweatherAPI":""}
+    //var config_data = JSON.parse(user);
+
     var new_name = document.getElementById('user_name').value;
     var new_location = document.getElementById('user_location').value;
     var new_APIkey = document.getElementById('APIkey').value;
-    config_data[0].user_name = new_name;
-    config_data[0].weather_location = new_location;
-    config_data[0].openweatherAPI = new_APIkey;
-    var new_config_data = "user ='"+JSON.stringify(config_data)+"'";
+    user.user_name = new_name;
+    user.weather_location = new_location;
+    user.openweatherAPI = new_APIkey;
+    var new_config_data = JSON.stringify(user);
     console.log(new_config_data);
-    function download(content, fileName, contentType) {
-        var a = document.createElement("a");
-        var file = new Blob([content], {type: contentType});
-        a.href = URL.createObjectURL(file);
-        a.download = fileName;
-        a.click();
-    }
-    download(new_config_data, 'config.json', 'application/json');
+    localStorage.setItem("ConfigLocalStorage", new_config_data);
+    //function download(content, fileName, contentType) {
+    //    var a = document.createElement("a");
+    //    var file = new Blob([content], {type: contentType});
+    //    a.href = URL.createObjectURL(file);
+    //    a.download = fileName;
+    //    a.click();
+    //}
+    //download(new_config_data, 'config.json', 'application/json');
 
     document.getElementById("next").innerHTML = "Make sure the downloaded file is named 'config.json' and place it in the same folder as index.html<br>Overwrite any older files if they exist.<br><br><input type='button' class='button' value='Done! Take me to my home page' onclick='take_me_home();' />";
     document.getElementById("save").value = "Download again";
@@ -90,3 +96,5 @@ function save_config(){
 function take_me_home() {
     window.open ('index.html','_self',false);
 }
+
+
