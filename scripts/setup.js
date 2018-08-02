@@ -1,14 +1,21 @@
 function dosomething(){
+    //clear any previous results or errors
     document.getElementById("error_message").innerHTML = "";
     document.getElementById("greeting").innerHTML = "";
     document.getElementById("weather").innerHTML = "";
+
     var name = document.getElementById('user_name').value;
     var location = document.getElementById('user_location').value;
     var APIkey = document.getElementById('APIkey').value;
     // console.log(name + location);
+    if (APIkey ==""){
+        var APIkey ="2b19e11e5e6f2f6b45e767ed1f96d3fb";
+    } else {
+        var APIkey = document.getElementById('APIkey').value;
+    }
     
-    if(name =="" || location =="" || APIkey ==""){
-        var error_message = "Whoops - Please fill out all the fields below and try again.";
+    if(name =="" || location ==""){
+        var error_message = "Whoops - Please fill out name and location below and try again.";
         document.getElementById("error_message").innerHTML = error_message;
         console.log(error_message);
     } else {
@@ -70,7 +77,6 @@ function read_config(){
 function save_config(){
     var user = {"user_name":"","weather_location":"","openweatherAPI":""}
     //var config_data = JSON.parse(user);
-
     var new_name = document.getElementById('user_name').value;
     var new_location = document.getElementById('user_location').value;
     var new_APIkey = document.getElementById('APIkey').value;
@@ -89,8 +95,8 @@ function save_config(){
     //}
     //download(new_config_data, 'config.json', 'application/json');
 
-    document.getElementById("next").innerHTML = "Make sure the downloaded file is named 'config.json' and place it in the same folder as index.html<br>Overwrite any older files if they exist.<br><br><input type='button' class='button' value='Done! Take me to my home page' onclick='take_me_home();' />";
-    document.getElementById("save").value = "Download again";
+    document.getElementById("next").innerHTML = "<input type='button' class='button' value='Done! Take me to my home page' onclick='take_me_home();' />";
+    document.getElementById("save").value = "Saved. Click to save again.";
 }
 
 function take_me_home() {

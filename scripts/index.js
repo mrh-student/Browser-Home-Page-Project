@@ -1,23 +1,24 @@
  
 
 function start() {
-  // read config.json to get user info
-  //var config_data = JSON.parse(user);
-
-  //var user = {"user_name":"Maria","weather_location":"Cork","openweatherAPI":"37cc90f9dc2d284a03cdf9d320e132e5"};
-  //var user = user_stored;
   var user_stored = localStorage.getItem("ConfigLocalStorage");
   if (localStorage.getItem("ConfigLocalStorage") === null){
     window.open ('setup.html','_self',false)
   } else {
     var user = JSON.parse(user_stored);
-    console.log(user_stored);
-    console.log(user);
+    //console.log(user_stored);
+    //console.log(user);
 
     var user_name = user.user_name;
     var location = user.weather_location;
     var openweatherAPI = user.openweatherAPI;
     console.log(user_name + location + openweatherAPI);
+
+    if (openweatherAPI == " "){
+      var openweatherAPI = "2b19e11e5e6f2f6b45e767ed1f96d3fb";
+    } else {
+      var openweatherAPI = user.openweatherAPI;
+    }
     // display user name
     document.getElementById("name").innerHTML=user_name+".";
     // start site widgets
@@ -162,6 +163,11 @@ function get_weather_open(location,openweatherAPI){
   var user = JSON.parse(user_stored);
   var location = user.weather_location;
   var openweatherAPI = user.openweatherAPI;
+  if (openweatherAPI == ""){
+    var openweatherAPI = "2b19e11e5e6f2f6b45e767ed1f96d3fb";
+  } else {
+    var openweatherAPI = user.openweatherAPI;
+  }
   var url = "https://api.openweathermap.org/data/2.5/weather?q="+location+"&appid="+openweatherAPI;
   console.log(url);
   $.getJSON(url, function(data){
