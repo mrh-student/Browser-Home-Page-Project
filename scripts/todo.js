@@ -1,3 +1,5 @@
+var todos = [];
+
 window.onload=function(){
   // Create a "close" button and append it to each list item
   var myNodelist = document.getElementsByTagName("LI");
@@ -11,7 +13,35 @@ window.onload=function(){
   }
 }
 
-var todos = { "todo_events" : []};
+function read_todos(){
+  var todos_stored = localStorage.getItem("TodosLocalStorage");
+  console.log(todos_stored);
+  var todos_list = JSON.parse(todos_stored);
+  //console.log(todos_list.length);
+  //console.log(todos_list[0]);
+  if (todos_list === null){
+    todos_list=[];
+  } else {
+    for (i=0 ; i < todos_list.length; i++) {
+      var li = document.createElement("li");
+      var t = document.createTextNode(todos_list[i]);
+      li.appendChild(t);
+      document.getElementById("myUL").appendChild(li);
+      var span = document.createElement("SPAN");
+      var txt = document.createTextNode("\u00D7");
+      span.className = "close";
+      span.appendChild(txt);
+      li.appendChild(span);
+    }
+    for (i = 0; i < close.length; i++) {
+      close[i].onclick = function() {
+        var div = this.parentElement;
+        div.style.display = "none";
+      }
+    }
+  }
+
+}
 
 // Click on a close button to hide the current list item
 var close = document.getElementsByClassName("close");
@@ -20,6 +50,7 @@ for (i = 0; i < close.length; i++) {
   close[i].onclick = function() {
     var div = this.parentElement;
     div.style.display = "none";
+    delete_from_list(div);
   }
 }
 
@@ -33,10 +64,25 @@ function newElement() {
     alert("You must write something!");
   } else {
     document.getElementById("myUL").appendChild(li);
-    // Add input to array
-    todos.todo_events.push({inputValue});
-    console.log(todos);
-    var json = JSON.stringify(todos);
+    // read & add existing items to array
+    var todos_stored = localStorage.getItem("TodosLocalStorage");
+    var todos_list = JSON.parse(todos_stored);
+    console.log(todos_stored);
+    if (todos_list === null){
+        todos = [];
+    } else {
+      for (i=0; i<todos_list.length; i++){
+        todos.push(todos_list[i]);
+      }
+    }
+    // Add new input to array
+    todos.push(inputValue);
+    //console.log(todos);
+    var new_todos = JSON.stringify(todos);
+    //console.log(new_todos);
+    localStorage.setItem("TodosLocalStorage", new_todos);
+    //var todos_stored = localStorage.getItem("TodosLocalStorage");
+    //console.log(todos_stored);
   }
   document.getElementById("myInput").value = "";
   var span = document.createElement("SPAN");
@@ -45,6 +91,7 @@ function newElement() {
   span.appendChild(txt);
   li.appendChild(span);
   
+  
   for (i = 0; i < close.length; i++) {
     close[i].onclick = function() {
       var div = this.parentElement;
@@ -52,4 +99,21 @@ function newElement() {
     }
   }
 
+}
+
+function delete_from_list (div){
+  // get current saved to do list
+  var todos_stored = localStorage.getItem("TodosLocalStorage");
+  console.log(todos_stored);
+  var todos_list = JSON.parse(todos_stored);
+  // find the index of the clicked item and remove it
+  var index = todos_list.indexOf(div.innerHTMl);
+  if (index > -1) {
+    todos_list.splice(index,1);
+    console.log(todos_list)
+  }
+  // save the new list in local storage
+  //var new_todos = JSON.stringify(todos_list);
+  //console.log(new_todos);
+  //localStorage.setItem("TodosLocalStorage", new_todos);
 }

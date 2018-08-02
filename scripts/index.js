@@ -29,6 +29,7 @@ function start() {
     get_quote();
     get_times();
     worldclock();
+    read_todos();
   }
   
 }
