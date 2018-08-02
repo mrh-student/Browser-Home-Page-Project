@@ -1,4 +1,6 @@
 var todos = [];
+var close = document.getElementsByClassName("close");
+var i;
 
 window.onload=function(){
   // Create a "close" button and append it to each list item
@@ -34,27 +36,19 @@ function read_todos(){
       li.appendChild(span);
     }
     for (i = 0; i < close.length; i++) {
-      close[i].onclick = function() {
+      close[i].onclick = function(){
         var div = this.parentElement;
+        var divtxt = div.innerText;
+        divtxt = divtxt.substring(0, divtxt.length - 1);
         div.style.display = "none";
+        console.log(divtxt);
+        delete_from_list(divtxt);
       }
     }
   }
 
 }
 
-// Click on a close button to hide the current list item
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function() {
-    var div = this.parentElement;
-    div.style.display = "none";
-    delete_from_list(div);
-  }
-}
-
-// Create a new list item when clicking on the "Add" button
 function newElement() {
   var li = document.createElement("li");
   var inputValue = document.getElementById("myInput").value;
@@ -71,6 +65,7 @@ function newElement() {
     if (todos_list === null){
         todos = [];
     } else {
+      todos = [];
       for (i=0; i<todos_list.length; i++){
         todos.push(todos_list[i]);
       }
@@ -82,7 +77,7 @@ function newElement() {
     //console.log(new_todos);
     localStorage.setItem("TodosLocalStorage", new_todos);
     //var todos_stored = localStorage.getItem("TodosLocalStorage");
-    //console.log(todos_stored);
+    console.log(todos_stored);
   }
   document.getElementById("myInput").value = "";
   var span = document.createElement("SPAN");
@@ -101,19 +96,23 @@ function newElement() {
 
 }
 
-function delete_from_list (div){
+function delete_from_list(divtxt){
   // get current saved to do list
   var todos_stored = localStorage.getItem("TodosLocalStorage");
   console.log(todos_stored);
   var todos_list = JSON.parse(todos_stored);
+
   // find the index of the clicked item and remove it
-  var index = todos_list.indexOf(div.innerHTMl);
-  if (index > -1) {
+  var index = todos_list.indexOf(divtxt);
+  console.log(index);
+  if (index > -2) {
     todos_list.splice(index,1);
     console.log(todos_list)
   }
   // save the new list in local storage
-  //var new_todos = JSON.stringify(todos_list);
-  //console.log(new_todos);
-  //localStorage.setItem("TodosLocalStorage", new_todos);
+  var new_todos = JSON.stringify(todos_list);
+  console.log(new_todos);
+  localStorage.setItem("TodosLocalStorage", new_todos);
+  //make invisible on page
+  
 }
