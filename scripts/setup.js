@@ -63,7 +63,12 @@ function read_config(){
     var user = JSON.parse(user_stored);
     var user_name = user.user_name;
     var location = user.weather_location;
-    var openweatherAPI = user.openweatherAPI;
+    
+    if (user.openweatherAPI == ""){
+        var openweatherAPI = "default API key for testing";
+    } else {
+        var openweatherAPI = user.openweatherAPI;
+    }
 
     document.getElementById("read_name").innerHTML = user_name;
     document.getElementById("read_location").innerHTML = location;
