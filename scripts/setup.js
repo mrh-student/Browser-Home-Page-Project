@@ -52,23 +52,19 @@ function dosomething(){
 }
 function give_temp(temp, condition, location){
     document.getElementById("weather").innerHTML = "It's " + temp + "°C in " + location + " with " + condition ;
-    //console.log(temp, condition)
 }
 
 function give_greeting(name){
     document.getElementById("greeting").innerHTML = "Hi there "+ name ;
-    //console.log(name)
 }
 
 function read_config(){
-    //var user = {"user_name":"Maria","weather_location":"Cork","openweatherAPI":"37cc90f9dc2d284a03cdf9d320e132e5"}
-    //var config_data = JSON.parse(user);
     var user_stored = localStorage.getItem("ConfigLocalStorage");
     var user = JSON.parse(user_stored);
     var user_name = user.user_name;
     var location = user.weather_location;
     var openweatherAPI = user.openweatherAPI;
-    //console.log(user_name+  location)
+
     document.getElementById("read_name").innerHTML = user_name;
     document.getElementById("read_location").innerHTML = location;
     document.getElementById("read_api").innerHTML = openweatherAPI;
@@ -76,7 +72,6 @@ function read_config(){
 
 function save_config(){
     var user = {"user_name":"","weather_location":"","openweatherAPI":""}
-    //var config_data = JSON.parse(user);
     var new_name = document.getElementById('user_name').value;
     var new_location = document.getElementById('user_location').value;
     var new_APIkey = document.getElementById('APIkey').value;
@@ -86,15 +81,6 @@ function save_config(){
     var new_config_data = JSON.stringify(user);
     console.log(new_config_data);
     localStorage.setItem("ConfigLocalStorage", new_config_data);
-    //function download(content, fileName, contentType) {
-    //    var a = document.createElement("a");
-    //    var file = new Blob([content], {type: contentType});
-    //    a.href = URL.createObjectURL(file);
-    //    a.download = fileName;
-    //    a.click();
-    //}
-    //download(new_config_data, 'config.json', 'application/json');
-
     document.getElementById("next").innerHTML = "<input type='button' class='button' value='Done! Take me to my home page' onclick='take_me_home();' />";
     document.getElementById("save").value = "Saved. Click to save again.";
 }

@@ -1,19 +1,19 @@
  
-
 function start() {
+
+  //read configuration from local storage
   var user_stored = localStorage.getItem("ConfigLocalStorage");
+  //if no configuration is saved, load setup.html, else load the page
   if (localStorage.getItem("ConfigLocalStorage") === null){
     window.open ('setup.html','_self',false)
   } else {
     var user = JSON.parse(user_stored);
-    //console.log(user_stored);
-    //console.log(user);
 
     var user_name = user.user_name;
     var location = user.weather_location;
     var openweatherAPI = user.openweatherAPI;
     console.log(user_name + location + openweatherAPI);
-
+    // if API key was left blank for testing, use default testing key
     if (openweatherAPI == " "){
       var openweatherAPI = "2b19e11e5e6f2f6b45e767ed1f96d3fb";
     } else {
@@ -158,7 +158,6 @@ function get_weather (){
 }
 
 function get_weather_open(location,openweatherAPI){
-  //var config_data = JSON.parse(user);
   var user_stored = localStorage.getItem("ConfigLocalStorage");
   var user = JSON.parse(user_stored);
   var location = user.weather_location;
