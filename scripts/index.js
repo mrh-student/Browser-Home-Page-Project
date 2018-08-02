@@ -7,7 +7,7 @@ function start() {
   //var user = {"user_name":"Maria","weather_location":"Cork","openweatherAPI":"37cc90f9dc2d284a03cdf9d320e132e5"};
   //var user = user_stored;
   var user_stored = localStorage.getItem("ConfigLocalStorage");
-  if (user_stored === ""){
+  if (localStorage.getItem("ConfigLocalStorage") === null){
     window.open ('setup.html','_self',false)
   } else {
     var user = JSON.parse(user_stored);
