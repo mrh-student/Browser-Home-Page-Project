@@ -5,7 +5,7 @@ function start() {
   var location = config_data[0].weather_location;
   var openweatherAPI = config_data[0].openweatherAPI;
 
-  if(user_name == "Jane Doe" && location == "New York" && openweatherAPI == ""){
+  if(user_name == "Jane Doe" && location == "New York" && openweatherAPI == "2b19e11e5e6f2f6b45e767ed1f96d3fb"){
     window.open ('setup.html','_self',false)
   } else {
     // display user name
