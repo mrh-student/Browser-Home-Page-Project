@@ -254,5 +254,3 @@ function worldclock() {
   var t = setTimeout(worldclock, 500);
 }
 
-  
-
