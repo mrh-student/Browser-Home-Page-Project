@@ -27,6 +27,10 @@ HTML, CSS, JavaScript
 - Firefox
 - Safari
 
+<p>Best for larger screens > 1200px width<br>
+Smallest dimensions to still look good is 1200 x 650 px<br>
+More work on optimsation for smaller screens needed</p>
+
 #### Features:
 
 - Random screen filling background image
@@ -53,7 +57,7 @@ HTML, CSS, JavaScript
 - Change Background button: Change the background image to another random pick 
     - currently using `_.sample` so picks can repeat, no other fine-tuning
 
-- To Do List: Add to do items, cross them off and/or delete them. More work required here. The To Do List widget will currently not save to do items once the page is reloaded - the best kind of to do list is the self-erasing kind. 
+- To Do List: Add to do items, cross them off and/or delete them. More work required here: If an item is crossed off (not deleted) it will be loaded again as uncrossed when reloading page. Download / share list feature planned.   
 
 - Search: bottom search bar searches Google for keyword in new tab
 
