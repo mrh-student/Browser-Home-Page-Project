@@ -2,26 +2,19 @@ var todos = [];
 var close = document.getElementsByClassName("close");
 var i;
 
-
-
 function read_todos(){
+  // clear the add new text field
   document.getElementById("myInput").value = "";
-  var links = document.getElementsByTagName("li");
-  console.log(links);
-  for (i in _.range(links.length)){
-    links[i].onload = function () {
-      links.style.display = "none";
-    }
-  }
 
+  // get currently saved to do items from local storage
   var todos_stored = localStorage.getItem("TodosLocalStorage");
-  //console.log(todos_stored);
   var todos_list = JSON.parse(todos_stored);
-  //console.log(todos_list);
-  //console.log(todos_list[0]);
+  
+  // check if the list is empty
   if (todos_list === null){
     todos_list=[];
   } else {
+    // create li elements in myUL to display stored to do items
     for (i=0 ; i < todos_list.length; i++) {
       var li = document.createElement("li");
       var t = document.createTextNode(todos_list[i]);
@@ -33,17 +26,18 @@ function read_todos(){
       span.appendChild(txt);
       li.appendChild(span);
     }
+    // append a close button to each li element
     for (i = 0; i < close.length; i++) {
       close[i].onclick = function(){
+        // make the clicked entry invisible
         var div = this.parentElement;
-        var divtxt_raw = div.innerText;
-        divtxt_raw = divtxt_raw.substring(0, divtxt_raw.length - 2);
         div.style.display = "none";
-        console.log(divtxt_raw);
+        // get the clicked entry's content, remove the 'x', stringify to add " " and parse back
+        var divtxt_raw = div.innerText;
+        divtxt_raw = divtxt_raw.substring(0, divtxt_raw.length - 1);
         var divtxt_1 = JSON.stringify(divtxt_raw);
         var divtxt = JSON.parse(divtxt_1);
-        console.log(divtxt_1);
-        console.log(divtxt);
+         // remove clicked entry from stored items using parsed entry to find index
         delete_from_list(divtxt);
       }
     }
@@ -52,6 +46,7 @@ function read_todos(){
 }
 
 function newElement() {
+  // read input and check if it is empty
   var inputValue = document.getElementById("myInput").value;
   if (inputValue === '') {
     alert("You must write something!");
@@ -59,25 +54,23 @@ function newElement() {
     // read & add existing items to array
     var todos_stored = localStorage.getItem("TodosLocalStorage");
     var todos_list = JSON.parse(todos_stored);
-    //console.log(todos_stored);
     if (todos_list === null){
         todos = [];
     } else {
       todos = [];
       for (i in _.range(todos_list.length)){
         todos.push(todos_list[i]);
-        console.log(todos);
       }
     }
     // Add new input to array
     todos.push(inputValue);
-    console.log(todos);
     var new_todos = JSON.stringify(todos);
-    //console.log(new_todos);
     localStorage.setItem("TodosLocalStorage", new_todos);
-    //var todos_stored = localStorage.getItem("TodosLocalStorage");
-    //console.log(todos_stored);
   }
+  // clear the current list of todo items
+  var links_container = document.getElementById("myUL");
+  links_container.innerHTML = '';
+  // display the current list of to do items
   read_todos();
 }
 
