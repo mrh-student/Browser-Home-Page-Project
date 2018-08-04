@@ -39,6 +39,7 @@ function set_me_up(){
 }
 
 function greet_user() {
+  // get time interval cut off points
   var now = moment().format("HH:mm");
   var morning = "06:00";
   var lunch = "12:00";
@@ -46,6 +47,7 @@ function greet_user() {
   var evening = "18:00";
   var night = "22:00";
 
+  // set time intervals and corresponding greeting
   if (now >= "00:00" && now < morning) {
     var greeting = "Good night, "
   } else if (now >= morning && now < lunch) {
@@ -61,20 +63,26 @@ function greet_user() {
   } else {
     var greeting = "Hello,  "
   }
+  // post greeting to page
   document.getElementById("greeting").innerHTML=greeting;
+  // let the site check for the time interval / greeting every 1s
   t = setTimeout(greet_user, 1000)
 }
 
 function random_bg(){
+  // list of background images
   var bg_images = ["images/bg001.jpg","images/bg002.jpg","images/bg003.jpg","images/bg004.jpg","images/bg005.jpg","images/bg006.jpg", "images/bg007.jpg", "images/bg008.jpg","images/bg009.jpg","images/bg010.jpg","images/bg011.jpg"]
 
+  // pick a random image
   var img_pick = _.sample(bg_images);
+  // add style to the head to append additional css w/ randomly picked image
   var $bg_image = $("#page")
   $bg_image.append("<style> html {background: url("+img_pick+") no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}</style>")  
   
 }
 
 function startTime() {
+    // get hours, minutes, day, year, month
     var today = new Date();
     var h = today.getHours();
     var m = today.getMinutes();
@@ -82,9 +90,11 @@ function startTime() {
     var y = today.getFullYear();
     var dd = today.getDate();
     var mo =today.getUTCMonth();
+    // run on hours and minutes to add a leading 0 if x < 10
     h = checkTime(h);
     m = checkTime(m);
 
+    // assign weekday name to weekday number returned
     if (d == 1){
       var day = "Monday";
     } else if (d == 2){
@@ -101,6 +111,7 @@ function startTime() {
       var day = "Sunday";
     }
 
+    // assign month name to month number returned
     if (mo == 0){
       var month = "January";
     } else if (mo == 1){
@@ -127,7 +138,7 @@ function startTime() {
       var month = "December";
     }
 
-
+    // assign date suffix
     if (dd == 1 || dd == 21 || dd == 31){
       var date_suffix = "st";
     } else if (dd == 2 || dd == 22) {
@@ -137,9 +148,10 @@ function startTime() {
     } else {
       var date_suffix = "th"
     }
-
+    //display time and date
     document.getElementById("clock").innerHTML = h + ":" + m;
     document.getElementById("date").innerHTML = day + ", "+month+" "+dd+date_suffix+" "+y;
+    // let the site check for time and date every 0.5s
     var t = setTimeout(startTime, 500);
 }
 
@@ -159,23 +171,30 @@ function get_weather (){
 }
 
 function get_weather_open(location,openweatherAPI){
+  //get locally stored API key and location
   var user_stored = localStorage.getItem("ConfigLocalStorage");
   var user = JSON.parse(user_stored);
   var location = user.weather_location;
   var openweatherAPI = user.openweatherAPI;
+  //check if API key is empty, if so use test key
   if (openweatherAPI == ""){
     var openweatherAPI = "2b19e11e5e6f2f6b45e767ed1f96d3fb";
   } else {
     var openweatherAPI = user.openweatherAPI;
   }
+  // set API call with saved location and API key
   var url = "https://api.openweathermap.org/data/2.5/weather?q="+location+"&appid="+openweatherAPI;
   console.log(url);
+  // get data from call and extract values
   $.getJSON(url, function(data){
     var temp_k = data.main.temp;
     var temp = Math.round(temp_k - 273.15);
     var condition = data.weather[0].description;
-    give_temp_open(temp, condition);
+    var icon = data.weather[0].icon + ".png";
+    console.log(icon);
+    give_temp_open(temp, condition, icon);
   });
+  // let the site check for weather every 15min
   var t = setTimeout(get_weather_open,900000)
 }
 
@@ -186,21 +205,26 @@ function give_temp(temp, cloudiness){
   console.log(now + " - Cork City - It's " + temp + "°C with " + cloudiness)
 }
 
-function give_temp_open(temp, condition){
+function give_temp_open(temp, condition, icon){
   var now = new Date();
+  // get stored location
   var user_stored = localStorage.getItem("ConfigLocalStorage");
   var user = JSON.parse(user_stored);
   var location = user.weather_location;
+  // post location and extracted weather values to page
   var $current = $("#current");
-  $current.html(location+"<br>It's " + temp + "°C with " + condition);
+  $current.html(location+" <img src='./images/weather/"+icon+"' width='25px' class='weather_img' /><br>It's " + temp + "°C with " + condition)
   console.log(now + " - "+location+" - It's " + temp + "°C with " + condition)
 }
 
 function get_quote(){
+  // list of quotes and authors
   var quotes = ["<h3>The fear of death follows from the fear of life. One who lives life fully is prepared to die at any time.</h3><br><i>Mark Twain</i>","<h3>Idealistic as it may sound, altruism should be the driving force in business, not just competition and a desire for wealth.</h3><br><i>Dalai Lama</i>","<h3>The best teachers are those who show you where to look, but don't tell you what to see.</h3><br><i>Alexandra K. Trenfor</i>","<h3>Sitting quietly, doing nothing, spring comes, and the grass grows by itself.</h3><br><i>Zenrin Kushû</i>","<h3>People do not seem to realize that their opinion of the world is also a confession of character.</h3><br><i>Ralph Waldo Emerson</i>","<h3>The problem is not the problem. The problem is your attitude about the problem.</h3><br><i>Captain Jack Sparrow</i>","<h3>It is the unknown we fear when we look upon death and darkness, nothing more.</h3><br><i>Albus Dumbledore</i>", "<h3>Denjetzigen Moment langt</h3><br><i>Unknown</i>", "<h3>Don't compromise yourself. You are everything you've got.</h3><br><i>Janis Joplin</i>"]
 
+  //pick a random quote
   var pick = _.sample(quotes);
   var $quote = $("#quote");
+  // display on page
   $quote.html(pick);
 } 
 
