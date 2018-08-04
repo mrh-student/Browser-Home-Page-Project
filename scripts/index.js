@@ -12,7 +12,8 @@ function start() {
     var user_name = user.user_name;
     var location = user.weather_location;
     var openweatherAPI = user.openweatherAPI;
-    console.log(user_name + location + openweatherAPI);
+    //console.log(user_name + location + openweatherAPI);
+    
     // if API key was left blank for testing, use default testing key
     if (openweatherAPI == " "){
       var openweatherAPI = "2b19e11e5e6f2f6b45e767ed1f96d3fb";
@@ -184,14 +185,14 @@ function get_weather_open(location,openweatherAPI){
   }
   // set API call with saved location and API key
   var url = "https://api.openweathermap.org/data/2.5/weather?q="+location+"&appid="+openweatherAPI;
-  console.log(url);
+  //console.log(url);
   // get data from call and extract values
   $.getJSON(url, function(data){
     var temp_k = data.main.temp;
     var temp = Math.round(temp_k - 273.15);
     var condition = data.weather[0].description;
     var icon = data.weather[0].icon + ".png";
-    console.log(icon);
+    //console.log(icon);
     give_temp_open(temp, condition, icon);
   });
   // let the site check for weather every 15min
