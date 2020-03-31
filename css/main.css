@@ -8,9 +8,8 @@ span#greeting, #clock, span#name {
 #clock {
   margin: auto;
   margin-bottom: 0px;
-  margin-top: 10%;
+  margin-top: 5%;
   font-size: 5em; 
-   
 }
 
 span#greeting {
@@ -73,7 +72,7 @@ i {
   background-color: rgba(182, 213, 248, 0.308);
   border-radius: 10px;
    color:rgba(255, 255, 255, 0.753);
-  font-size: 0.84em;
+  font-size: 0.6em;
   line-height: 1em;
 }
 
@@ -117,8 +116,7 @@ i {
 #weather-box {
   margin: 0 auto;
   background-color: rgba(182, 213, 248, 0.308);
-  border-radius: 10px;
-   
+  border-radius: 10px; 
 }
 
 #current{
@@ -146,7 +144,7 @@ i {
   background-color: rgba(106, 190, 113, 0.568);
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 15px 15px;
   text-align: center;
   text-decoration: none;
   font-family: 'Lato', sans-serif;
@@ -156,7 +154,7 @@ i {
   border-radius: 25px;
 }
 
-#library {
+#todo-box {
   background-color: rgba(182, 213, 248, 0.308);
   border-radius: 10px;
   min-width: 150px; 
@@ -174,7 +172,7 @@ i {
   line-height: 2.4em;
 }
 
-#library.utility, #background-box.utility, #weather-box.utility {
+.utility {
   float: left;
   max-height: 70px;
   width: 30%;
@@ -182,7 +180,7 @@ i {
   margin: auto;
 }
 
-#library.utility {
+#todo-box.utility {
   float: right;
 }
 
@@ -400,6 +398,14 @@ ul li.checked::before {
   bottom: 0;
   left: 10px;
   cursor: pointer;
+}
+
+#wunderlist {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
 }
 
 @keyframes expanding{

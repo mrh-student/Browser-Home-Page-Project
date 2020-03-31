@@ -9,9 +9,9 @@
     <link rel="shortcut icon" href="images/icon2.png" type="image/png" />
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="scripts/setup.js"></script>
+    
 </head>
-<body onload="read_config();">
+<body onload="readConfig()">
     <header>
         <h1>HomeTab Configuration</h1>
     </header>
@@ -37,15 +37,15 @@
         </section>
         <section>
             <span><h3>Update configuration:</h3></span><br>
-            <span id="error_message"></span>
+            <span id="errormessage"></span>
             <table>
                 <tr>
                     <td><span>Your name:</span></td>
-                    <td><input type="text" value="" id="user_name"></td>
+                    <td><input type="text" value="" id="userName"></td>
                 </tr>
                 <tr>
                     <td><span>Your location (used for weather):</span></td>
-                    <td><input type="text" value="" id="user_location"></td>
+                    <td><input type="text" value="" id="userLocation"></td>
                 </tr>
                 <tr>
                     <td><span>Your <a href="https://openweathermap.org/appid#get" target=_blank>openweathermap API key</a><br>(Leave blank for testing)</span></td>
@@ -53,21 +53,23 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input type="button" class="button" value="Go" onclick="dosomething();"/></td>
+                    <td><input type="button" class="button" value="Go" id="btnsubmitsetup"/></td>
                 </tr>
             </table>
         </section>
         <section>
             <div id="greeting"></div>
             <div id="weather"></div>
-            <div id="check"></div>
-            <article>
-                <div id="next"></div>
-            </article>
+            <div id="check" hidden ="true">
+                <span>Does that look good to you?</span>
+                <br><br>
+                <input type='button' id='save' class='button' value='Yes, save.'/>
+            </div>
         </section>
     </main>
     <footer>
-    <input type="button" class="button" value="back to home" onclick="take_me_home();">    
+    <input type="button" class="button" value="back to home" onclick="backToHome();">    
     </footer>
     </body>
+    <script type="text/javascript" src="scripts/setup.js"></script>
 </html>
