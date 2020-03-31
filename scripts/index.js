@@ -1,4 +1,5 @@
- 
+//**CONSTANTS */ 
+
 const backgroundImages = [
   "images/bg001.jpg",
   "images/bg002.jpg",
@@ -11,7 +12,7 @@ const backgroundImages = [
   "images/bg009.jpg",
   "images/bg010.jpg",
   "images/bg011.jpg"
-];
+]
 
 const quotes = [
   "<h3>The fear of death follows from the fear of life. One who lives life fully is prepared to die at any time.</    h3><br><i>Mark Twain</i>",
@@ -23,7 +24,7 @@ const quotes = [
   "<h3>It is the unknown we fear when we look upon death and darkness, nothing more.</h3><br><i>Albus Dumbledore</i>",
   "<h3>Denjetzigen Moment langt</h3><br><i>Unknown</i>",
   "<h3>Don't compromise yourself. You are everything you've got.</h3><br><i>Janis Joplin</i>"
-];
+]
 
 const timeZoneList = [
   {
@@ -68,16 +69,28 @@ const timeZoneList = [
     office: "San Francisco",
     listingId: "sf"
   }
-];
+]
 
-document.getElementById('quote').addEventListener('click', function(){
+//** BUTTONS, INPUTS & LABELS */
+const btnQuote = document.getElementById('quote')
+const btnBackground = document.getElementById('btnchangebackground')
+
+const sctnTodo = document.getElementById('mySidenav')
+
+const lblName = document.getElementById('name')
+const lblGreeting = document.getElementById('greeting')
+const lblClock = document.getElementById('clock')
+const lblDate = document.getElementById('date')
+
+btnQuote.addEventListener('click', function(){
   getQuote(quotes)
 })
 
-document.getElementById('btnchangebackground').addEventListener('click', function(){
+btnBackground.addEventListener('click', function(){
   setRandomBackground(backgroundImages)
 })
 
+//** MAIN */
 function start() {
   //if no configuration is saved, load setup.html, else load the page
   if (localStorage.getItem("ConfigLocalStorage") === null){
@@ -91,26 +104,24 @@ function start() {
   const userAPIKey = user.openweatherAPI
 
   //start widgets
-  greetUser();
-  setInterval(greetUser,60000);
-  document.getElementById('name').innerText= `${userName}.`
-  setRandomBackground(backgroundImages);
+  greetUser()
+  setInterval(greetUser,60000)
+  lblName.innerText= `${userName}.`
+  setRandomBackground(backgroundImages)
   setInterval(getTime, 500)
-  setInterval(getWorldClock, 500); 
-  getWeather(userLocation,userAPIKey)
-  getQuote(quotes);
+  setInterval(getWorldClock, 500)
+  setInterval(getWeather(userLocation,userAPIKey),900000)
+  getQuote(quotes)
   
 }
 
 function greetUser() {
-  const now = moment().format('HH:mm')
-  const greeting = getGreeting(now)
-  document.getElementById('greeting').innerHTML = greeting
+  lblGreeting.innerText = getGreeting(moment().format('HH:mm'))
 }
 
 function setRandomBackground(backgroundImages){
   const selectedImage = _.sample(backgroundImages)
-  var $bg_image = $('#page')
+  const $bg_image = $('#page')
   $bg_image.append("<style> html {background: url("+selectedImage+") no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}</style>")  
   
 }
@@ -126,13 +137,13 @@ function getTime() {
   const year = today.getFullYear()
 
   //display time and date
-  document.getElementById('clock').innerText = `${hours}:${minutes}`
-  document.getElementById('date').innerText = `${dayName}, ${month} ${dayNumber+checkDateSuffix(dayNumber)} ${year}`
+  lblClock.innerText = `${hours}:${minutes}`
+  lblDate.innerText = `${dayName}, ${month} ${dayNumber+checkDateSuffix(dayNumber)} ${year}`
 }
 
 function getWeather(location,apiKey){
   // set API call with saved location and API key
-  const url = "https://api.openweathermap.org/data/2.5/weather?q="+location+"&appid="+apiKey;
+  const url = "https://api.openweathermap.org/data/2.5/weather?q="+location+"&appid="+apiKey
   
   // get data from call and extract values
   $.getJSON(url, function(data){
@@ -142,9 +153,7 @@ function getWeather(location,apiKey){
     const icon = data.weather[0].icon + ".png"
 
     giveTemp(tempCelsius, condition, icon, location)
-  });
-  // let the site check for weather every 15min
-  setTimeout(getWeather,900000)
+  })
 }
 
 function getQuote(quotes){
@@ -159,14 +168,22 @@ function getWorldClock() {
   const now = new Date()
   const times = getTimeZones(timeZoneList, now)
   for (i=0; i < times.length; i++){
-    var timedisplay = times[i].jstime.format('HH') + ":" + times[i].jstime.format('mm');
+    let timedisplay = times[i].jstime.format('HH') + ":" + times[i].jstime.format('mm')
     document.getElementById(times[i].jshtmlid).innerHTML = times[i].jslocation + ": " + timedisplay
   } 
 }
 
-// *** helpers ***
+function openNav() {
+  sctnTodo.style.height = '450px'
+}
+
+function closeNav() {
+  sctnTodo.style.height = '0'
+}
+
+// *** HELPERS ***
 function goToSetup(){
-  window.open ('setup.html','_self',false);
+  window.open ('setup.html','_self',false)
 }
 
 function formatTime(i) {
@@ -179,7 +196,6 @@ function giveTemp(temp, condition, icon, location){
   // post location and extracted weather values to page
   var $current = $("#current")
   $current.html(location+" <img src='./images/weather/"+icon+"' width='25px' class='weather_img' /><br>It's " + temp + "°C with " + condition)
-  console.log(now + " - "+location+" - It's " + temp + "°C with " + condition)
 }
 
 function getTimeZones(timeZoneList, now) {
@@ -215,7 +231,7 @@ function getTimeZones(timeZoneList, now) {
     }
     times.push(listing)
   }
-  return times; 
+  return times 
 }
 
 function assignDayName(i){
@@ -266,12 +282,4 @@ function getGreeting(now){
     greeting = "It's getting late, "
   }
   return greeting
-}
-
-function openNav() {
-  document.getElementById('mySidenav').style.height = '450px'
-}
-
-function closeNav() {
-  document.getElementById('mySidenav').style.height = '0'
 }

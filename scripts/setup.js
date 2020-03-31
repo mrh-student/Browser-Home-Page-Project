@@ -1,97 +1,91 @@
-document.getElementById('btnsubmitsetup').addEventListener('click', function(){
+//** BUTTONS & INPUTS & LABELS */
+
+const btnSubmit = document.getElementById('btnSubmitSetup')
+const btnSave = document.getElementById('save')
+const inputName = document.getElementById('userName')
+const inputLocation = document.getElementById('userLocation')
+const inputAPIKey = document.getElementById('APIkey')
+const lblError = document.getElementById('errormessage')
+const lblGreeting = document.getElementById('greeting')
+const lblWeather = document.getElementById('weather')
+
+btnSubmit.addEventListener('click', function(){
+    clearResults()
     checkInput()
     document.getElementById('check').hidden = false
-    saveConfig()
 })
 
-function checkInput(){
-    //clear any previous results or errors
-    document.getElementById('errormessage').innerHTML = ''
-    document.getElementById('greeting').innerHTML = ''
-    document.getElementById('weather').innerHTML = ''
+btnSave.addEventListener('click', function(){
+    saveConfig()
+    backToHome()
+})
 
-    const name = document.getElementById('userName').value
-    const location = document.getElementById('userLocation').value
-    let APIkey = document.getElementById('APIkey').value
-    
-    if (APIkey ==''){
-        APIkey ='2b19e11e5e6f2f6b45e767ed1f96d3fb'
-    }
-    
-    if(name =='' || location ==''){
-        const errormessage = 'Whoops - Please fill out name and location below and try again.'
-        document.getElementById('errormessage').innerHTML = errormessage
-        console.log(errormessage)
-    } else {
-        giveGreeting(name)
-        const url = 'https://api.openweathermap.org/data/2.5/weather?q='+location+'&appid='+APIkey
-
-        $.getJSON(url, function(data){
-            const temp = Math.round(data.main.temp - 273.15)
-            const condition = data.weather[0].description
-
-            console.log(temp+' '+condition)
-            giveTemp(temp, condition, location)
-            document.getElementById('check').innerHTML= ''
-        }).fail(function(jqXHR){
-            if (jqXHR.status == 404) {
-                let failMessage = 'Error 404 - City not found. Check the spelling or choose a different location.'
-                document.getElementById('errormessage').innerHTML = failMessage
-                document.getElementById('check').innerHTML= ''
-            } else if(jqXHR.status == 401){
-                let failMessage = 'Error:401 - Access denied. Check that you have entered a valid API key.'
-                document.getElementById('errormessage').innerHTML = failMessage
-                document.getElementById('check').innerHTML= ''
-            } else {
-                let failMessage = 'An unknown error occurred. Please try again.'
-                document.getElementById('errormessage').innerHTML = failMessage
-                document.getElementById('check').innerHTML=''
-            }
-        });
-        
-    }
-}
-function giveTemp(temp, condition, location){
-    document.getElementById('weather').innerHTML = `It's ${temp}°C in ${location} with ${condition}`
-}
-
-function giveGreeting(name){
-    document.getElementById('greeting').innerHTML = `Hi there ${name}`
-}
-
+//** MAIN */
 function readConfig(){
     const user = JSON.parse(localStorage.getItem('ConfigLocalStorage'))
     const userName = user.userName
     const location = user.weatherLocation
-    let openweatherAPI = user.openweatherAPI
-    
-    if (openweatherAPI == ''){
-        openweatherAPI = 'default API key for testing'
-    }
+    const openweatherAPI = user.openweatherAPI
 
-    document.getElementById('read_name').innerHTML = userName
-    document.getElementById('read_location').innerHTML = location
-    document.getElementById('read_api').innerHTML = openweatherAPI
+    document.getElementById('readName').innerText = userName
+    document.getElementById('readLocation').innerText = location
+    document.getElementById('readAPI').innerText = openweatherAPI
 }
+function checkInput(){
+    const name = inputName.value
+    const location = inputLocation.value
+    const APIkey = inputAPIKey.value
+    
+    if(name =='' || location =='' || APIkey ==''){
+        lblError.innerText = 'Whoops - Please fill out name, location and API key below and try again.'
+    } else {
+        printGreeting(name)
+        const url = constructURL(location, APIkey)
 
+        $.getJSON(url, function(data){
+            const temp = Math.round(data.main.temp - 273.15)
+            const condition = data.weather[0].description
+            printWeather(temp, condition, location)
+        }).fail(function(jqXHR){
+            if (jqXHR.status == 404) {
+                lblError.innerText = 'Error 404 - City not found. Check the spelling or choose a different location.'
+                document.getElementById('check').innerHTML= ''
+            } else if(jqXHR.status == 401){
+                lblError.innerText = 'Error:401 - Access denied. Check that you have entered a valid API key.'
+                document.getElementById('check').innerHTML= ''
+            } else {
+                lblError.innerText = 'An unknown error occurred. Please try again.'
+                document.getElementById('check').innerHTML=''
+            }
+        })
+        
+    }
+}
 function saveConfig(){
     const user = {
-        userName: '',
-        weatherLocation: '',
-        openweatherAPI: ''
+        userName: inputName.value,
+        weatherLocation: inputLocation.value,
+        openweatherAPI: inputAPIKey.value
     }
-
-    user.userName = document.getElementById('userName').value
-    user.weatherLocation = document.getElementById('userLocation').value
-    user.openweatherAPI = document.getElementById('APIkey').value
-
-    const newConfigData = JSON.stringify(user)
-    console.log(newConfigData)
-    localStorage.setItem('ConfigLocalStorage', newConfigData)
+    localStorage.setItem('ConfigLocalStorage', JSON.stringify(user))
 }
 
+//** HELPERS */
+function clearResults(){
+    //clear any previous results or errors
+    lblError.innerHTML = ''
+    lblGreeting.innerHTML = ''
+    lblWeather.innerHTML = ''
+}
+function constructURL(location, APIKey){
+    return 'https://api.openweathermap.org/data/2.5/weather?q='+location+'&appid='+APIKey
+}
+function printWeather(temp, condition, location){
+    lblWeather.innerHTML = `It's ${temp}°C in ${location} with ${condition}`
+}
+function printGreeting(name){
+    lblGreeting.innerHTML = `Hi there ${name}`
+}
 function backToHome() {
-    window.open ('index.html','_self',false);
+    window.open ('index.html','_self',false)
 }
-
-
