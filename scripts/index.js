@@ -15,15 +15,42 @@ const backgroundImages = [
 ]
 
 const quotes = [
-  "<h3>The fear of death follows from the fear of life. One who lives life fully is prepared to die at any time.</    h3><br><i>Mark Twain</i>",
-  "<h3>Idealistic as it may sound, altruism should be the driving force in business, not just competition and a desire for wealth.</h3><br><i>Dalai Lama</i>",
-  "<h3>The best teachers are those who show you where to look, but don't tell you what to see.</h3><br><i>Alexandra K. Trenfor</i>",
-  "<h3>Sitting quietly, doing nothing, spring comes, and the grass grows by itself.</h3><br><i>Zenrin Kushû</i>",
-  "<h3>People do not seem to realize that their opinion of the world is also a confession of character.</h3><br><i>Ralph Waldo Emerson</i>",
-  "<h3>The problem is not the problem. The problem is your attitude about the problem.</h3><br><i>Captain Jack Sparrow</i>",
-  "<h3>It is the unknown we fear when we look upon death and darkness, nothing more.</h3><br><i>Albus Dumbledore</i>",
-  "<h3>Denjetzigen Moment langt</h3><br><i>Unknown</i>",
-  "<h3>Don't compromise yourself. You are everything you've got.</h3><br><i>Janis Joplin</i>"
+  {
+    quote: 'The fear of death follows from the fear of life. One who lives life fully is prepared to die at any time.',
+    author: 'Mark Twain'
+  },
+  {
+    quote: 'Idealistic as it may sound, altruism should be the driving force in business, not just competition and a desire for wealth.',
+    author: 'The Dalai Lama',
+  },
+  {
+    quote: "The best teachers are those who show you where to look, but don't tell you what to see.",
+    author: 'Alexandra K. Trenfor',
+  },
+  {
+    quote: 'Sitting quietly, doing nothing, spring comes, and the grass grows by itself.',
+    author: 'Zenrin Kushû',
+  },
+  {
+    quote: 'People do not seem to realize that their opinion of the world is also a confession of character.',
+    author: 'Ralph Waldo Emerson',
+  },
+  {
+    quote: 'The problem is not the problem. The problem is your attitude about the problem.',
+    author: 'Captain Jack Sparrow',
+  },
+  {
+    quote: 'It is the unknown we fear when we look upon death and darkness, nothing more.',
+    author: 'Albus Dumbledore',
+  },
+  {
+    quote: 'Denjetzigen Moment langt',
+    author: 'Unkown',
+  },
+  {
+    quote: "Don't compromise yourself. You are everything you've got.",
+    author: 'Janis Joplin',
+  }
 ]
 
 const timeZoneList = [
@@ -83,6 +110,7 @@ const lblClock = document.getElementById('clock')
 const lblDate = document.getElementById('date')
 
 btnQuote.addEventListener('click', function(){
+  btnQuote.innerText = '';
   getQuote(quotes)
 })
 
@@ -96,7 +124,6 @@ function start() {
   if (localStorage.getItem("ConfigLocalStorage") === null){
     window.open ('setup.html','_self',false)
   }
-  
   //get data from local storage
   const user = JSON.parse(localStorage.getItem("ConfigLocalStorage"))
   const userName = user.userName
@@ -159,17 +186,21 @@ function getWeather(location,apiKey){
 function getQuote(quotes){
   //pick a random quote
   const pick = _.sample(quotes)
-  const $quote = $("#quote")
-  // display on page
-  $quote.html(pick)
+  let quoteText = document.createElement('h3');
+  let quoteAuthor = document.createElement('i');
+  quoteText.innerText = pick.quote;
+  quoteAuthor.innerText = pick.author;
+  btnQuote.appendChild(quoteText);
+  btnQuote.appendChild(document.createElement('br'));
+  btnQuote.appendChild(quoteAuthor);
 } 
 
 function getWorldClock() {
   const now = new Date()
   const times = getTimeZones(timeZoneList, now)
   for (i=0; i < times.length; i++){
-    let timedisplay = times[i].jstime.format('HH') + ":" + times[i].jstime.format('mm')
-    document.getElementById(times[i].jshtmlid).innerHTML = times[i].jslocation + ": " + timedisplay
+    let timedisplay = `${times[i].jstime.format('HH')}:${times[i].jstime.format('mm')}`
+    document.getElementById(times[i].jshtmlid).innerText = `${times[i].jslocation}: ${timedisplay}`
   } 
 }
 

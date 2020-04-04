@@ -1,5 +1,5 @@
 # HomeTab
-After using the (free) Momentum browser home page for a while, I wanted to create my own to be able to personalise it more. 
+After using the Momentum browser home page for a while, I wanted to create my own to be able to personalise it more. 
 This is an ongoing project, also used to try out new techniques from coding courses.<br><br>
 I am currently running the page locally as the default browser home page / new tab page.<br>
 <img src="images/screenshot.png" width="800px"> 
@@ -7,7 +7,7 @@ I am currently running the page locally as the default browser home page / new t
 #### Install
 <p>To customise, the page needs your name, your location (for weather) and an <a href="https://openweathermap.org/appid#get">API key from openweathermap</a> (free option available). No affiliation, I just liked their weather data output the best.</p>
 
-When `index.html` is loaded and no configuration information is found, `setup.html` is loaded. You can enter name, location and API key here. The values are stored in local storage. To test, you do not need to enter an API key, a default test key will be loaded.
+When `index.html` is loaded and no configuration information is found, `setup.html` is loaded. You can enter name, location and API key here. The values are stored in local storage. 
 
 <p>If you want to download HomeTab to use as a homepage, make sure to get your own API key at https://openweathermap.org/appid#get, the default test key is a free key and will be temporarily blocked after a certain amount of calls.</p>
 
@@ -38,26 +38,26 @@ More work on optimsation for smaller screens needed</p>
 - Clock: shows current time in hours and minutes, updated every 0.5s
 - Date: shows current date as 'weekday, month, date, year', updated every 0.5s
 - User greeting: shows a custom greeting depending on the current time, updated every 1s
-    - change the greetings and timeframes in index.js , `greet_user(user_name)` function
+    - change the greetings and timeframes in index.js , `getGreeting()` function
 
 - Timezone Clocks: show current time in different locations around the world, updated every 0.5s
-    - modify `get_times()` and `worldclock()` function in index.js to edit which cities / timezones to show
+    - modify `getTimeZones()` function and timeZoneList var in index.js to edit which cities / timezones to show
 
 - Quote: Shows a random quote whenever the page is loaded / reloaded 
     - currently using `_.sample` so picks can repeat, no other fine-tuning
     - the quote box will show an expanding animation everytime the page is loaded / reloaded
     - get a new random quote by clicking on the quote
-    - quotes are set in index.js, `get_quote()` function
+    - quotes are set in index.js, `getQuote()` function
     
 
 - Weather: Shows the current temperature and condition using openweathermaps API, updates every 15min
     - You can set the location and API key for the call through setup.html / config.json
-    - To customise update time modifiy the timeout in the `get_weather_open(location,openweatherAPI)` function (be careful since there is a daily/monthly limit for free API calls using openweathermaps )
+    - To customise update time modifiy the Interval for the `getWeather()` function (be careful since there is a daily/monthly limit for free API calls using openweathermaps )
 
 - Change Background button: Change the background image to another random pick 
     - currently using `_.sample` so picks can repeat, no other fine-tuning
 
-- To Do List: Add to do items, cross them off and/or delete them. More work required here: If an item is crossed off (not deleted) it will be loaded again as uncrossed when reloading page. Download / share list feature planned.   
+- To Do List: Add to do items, cross them off and/or delete them. 
 
 - Search: bottom search bar searches Google for keyword in new tab
 
@@ -67,7 +67,7 @@ More work on optimsation for smaller screens needed</p>
 
 index.js is referencing `images/bg001.jpg` - `images/bg011.jpg`<br>
 Example images are included in the repository, but you can replace them with your own in the images folder<br>
-Images are set in `random_bg()` function<br>
+Images are set in `setRandomBackground()` function<br>
 <p>Example image sources: 
 Free to use
 

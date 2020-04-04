@@ -24,7 +24,7 @@
       <span id="greeting"></span><span id="name"></span>
       <div id="inner-wrapper">
         <div id="timezone_wrapper">
-          <span id="sf" class="time_zone"><span class="sftemp"></span></span>
+          <span id="sf" class="time_zone"></span>
           <span id="nashville" class="time_zone"></span>
           <span id="newyork" class="time_zone"></span>
           <span id="mendoza" class="time_zone"></span>
@@ -43,7 +43,7 @@
             <input type="button" class="button" value="Change background" id ="btnchangebackground"/>
           </div>
           <div id="todo-box" class="utility">
-            <div id="dosomething">
+            <div id="todo-wrapper">
               <span style="cursor:pointer" onclick="openNav(), readTodos()">&#9776; To Do</span>
               <div id="mySidenav" class="sidenav">
                   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -51,18 +51,9 @@
                     <h2 style="line-height:1em;">To Do List</h2>
                     <input type="text" id="myInput" placeholder="New To Do...">
                     <span onclick="newElement()" class="addBtn">Add</span>
+                    <input class="delete_button" type="button" hidden="true" value="Delete All" id="delAll"/>
                   </div>
-                  <ul id="myUL">
-                  </ul>
-                  <script>
-                    /* strike through clicked to dos, will load to early if included in separate js file */
-                    var list = document.querySelector('ul');
-                    list.addEventListener('click', function(ev) {
-                      if (ev.target.tagName === 'LI') {
-                        ev.target.classList.toggle('checked');
-                      }
-                    }, false);
-                  </script>
+                  <ul id="myUL"></ul>
               </div>
             </div>
           </div>

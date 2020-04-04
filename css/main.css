@@ -78,6 +78,7 @@ i {
 
 .time_zone {
   margin-right: 20px;
+  white-space: nowrap;
 }
 
 #quote-wrapper {
@@ -162,7 +163,7 @@ i {
   margin: auto; 
 }
 
-#dosomething {
+#todo-wrapper {
   color: #fff;
   padding-top: 1vh;
   padding-left: 6px;
@@ -380,6 +381,20 @@ ul li.checked::before {
   cursor: pointer;
   border-radius: 25px;
 }
+.delete_button {
+  background-color: rgba(249, 64, 23, 0.308);
+  border: none;
+  color: white;
+  padding: 1px 3px;
+  text-align: center;
+  text-decoration: none;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.6em;
+  margin: 0;
+  margin-bottom: 2px;
+  width: 100%;
+  cursor: pointer;
+}
 
 .search_field {
   border-radius: 5px;
@@ -417,12 +432,25 @@ ul li.checked::before {
   }
 }
 
-@media (max-width: 870px){
+@media (max-width: 1373px){
+  #current {
+    font-size: 0.7em;
+  }
+}
+@media (max-width: 1160px){
+  #current {
+    font-size: 0.6em;
+  }
   #quote {
     width: 270px;
   }
+  #background-box {
+    min-width: 0px;
+    width: 0px;
+    visibility: hidden;
+    
+  }
 }
-
 @media (max-width: 767px){
   #quote {
     width: 180px;

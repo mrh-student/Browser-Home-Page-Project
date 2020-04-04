@@ -1,54 +1,69 @@
-let todos = []
 const close = document.getElementsByClassName('close')
 const inputAddNew = document.getElementById('myInput')
 const lblTodoList = document.getElementById('myUL')
+const list = document.querySelector('ul')
+const btnDel = document.getElementById('delAll')
 let i
 
-function clearAddNew(){
-  inputAddNew.value = ''
-}
+btnDel.addEventListener('click', function(){
+  deleteStoredTodos()
+  readTodos()
+  btnDel.hidden = true
+})
 
-function clearTodoListDisplay(){
-  lblTodoList.innerHTML = ''
-}
+lblTodoList.addEventListener('click', function(e) {
+  let todoText = e.target.innerText.substring(0,e.target.innerText.length - 2)
+  let storedTodos = getStoredTodos()
+  let todoEntryIndex = storedTodos.indexOf(findTodoEntry(storedTodos, todoText))
+
+  if (e.target.tagName === 'LI') {
+    e.target.classList.toggle('checked')
+    if(storedTodos[todoEntryIndex].completed == true){
+      storedTodos[todoEntryIndex].completed = false
+    } else {
+      storedTodos[todoEntryIndex].completed = true
+    }
+    localStorage.setItem('TodosLocalStorage', JSON.stringify(storedTodos))
+  }
+  console.log(storedTodos)
+})
+
 function readTodos(){
-  // clear the add new text field
   clearAddNew()
   clearTodoListDisplay()
-
-  // get currently saved to do items from local storage
-  const storedTodos = localStorage.getItem('TodosLocalStorage')
-  let todosList = JSON.parse(storedTodos)
   
-  // check if the list is empty
-  if (todosList === null){
-    todos=[]
-  } else {
+  // get currently saved to do items from local storage
+  let storedTodos = getStoredTodos()
+  
+  if (storedTodos.length > 0){
+    btnDel.hidden = false
     // create li elements in myUL to display stored to do items
-    for (i=0 ; i < todosList.length; i++) {
+    for (i=0 ; i < storedTodos.length; i++) {
       let li = document.createElement('li')
-      let t = document.createTextNode(todosList[i])
-      li.appendChild(t)
-      lblTodoList.appendChild(li)
+      let t = document.createTextNode(storedTodos[i].text)
       let span = document.createElement('SPAN')
       let txt = document.createTextNode('\u00D7')
       span.className = 'close'
+      if(storedTodos[i].completed == true){
+        li.className = 'checked'
+      }
       span.appendChild(txt)
+      li.appendChild(t)
       li.appendChild(span)
+      lblTodoList.appendChild(li)
     }
     // append a close button to each li element
     for (i = 0; i < close.length; i++) {
       close[i].onclick = function(){
-        const div = this.parentElement
+        storedTodos = getStoredTodos()
+        const liElement = this.parentElement
+        let liElementText = liElement.innerText
+        liElementText = liElementText.substring(0, liElementText.length - 2)
+        const todoEntryIndex = storedTodos.indexOf(findTodoEntry(storedTodos, liElementText))
         // make the clicked entry invisible
-        div.style.display = 'none'
-        // get the clicked entry's content, remove the 'x', stringify to add ' ' and parse back
-        let rawDivText = div.innerText
-        rawDivText = rawDivText.substring(0, rawDivText.length - 1)
-        //let divtxt_1 = JSON.stringify(rawDivText)
-        let divText = JSON.parse(JSON.stringify(rawDivText))
-         // remove clicked entry from stored items using parsed entry to find index
-        deleteFromList(divText)
+        liElement.style.display = 'none'
+        // remove clicked entry from stored items
+        deleteFromList(todoEntryIndex)
       }
     }
   }
@@ -61,35 +76,53 @@ function newElement() {
     alert('You must write something!')
   } else {
     // read & add existing items to array
-    const storedTodos = localStorage.getItem('TodosLocalStorage')
-    let todosList = JSON.parse(storedTodos)
-    todos = []
-    if (todosList != null){
-      for (i in _.range(todosList.length)){
-        todos.push(todosList[i])
-      }
+    let storedTodos = getStoredTodos()
+    let newTodo = {
+      text: inputValue,
+      completed: false
     }
     // Add new input to array
-    todos.push(inputValue)
-    localStorage.setItem('TodosLocalStorage', JSON.stringify(todos))
+    storedTodos.push(newTodo)
+    localStorage.setItem('TodosLocalStorage', JSON.stringify(storedTodos))
   }
   // clear the current list of todo items
   // display the current list of to do items
+  clearAddNew()
   clearTodoListDisplay()
   readTodos()
 }
 
-function deleteFromList(entry){
+function deleteFromList(entryIndex){
   // get current saved to do list
-  const storedTodos = localStorage.getItem('TodosLocalStorage')
-  let todosList = JSON.parse(storedTodos)
-
-  // find the index of the clicked item and remove it
-  const index = todosList.indexOf(entry)
-  console.log(index)
-  if (index != null) {
-    todosList.splice(index,1)
-  } 
+  let storedTodos = getStoredTodos()
+  storedTodos.splice(entryIndex,1)
   // save the new list in local storage
-  localStorage.setItem('TodosLocalStorage', JSON.stringify(todosList))
+  localStorage.setItem('TodosLocalStorage', JSON.stringify(storedTodos))
+  if(storedTodos.length < 1){
+  btnDel.hidden = true
+  }
+}
+
+function deleteStoredTodos(){
+  localStorage.setItem('TodosLocalStorage', JSON.stringify([]))
+}
+
+function getStoredTodos(){
+  return JSON.parse(localStorage.getItem('TodosLocalStorage'))
+}
+
+function clearAddNew(){
+  inputAddNew.value = ''
+}
+
+function clearTodoListDisplay(){
+  lblTodoList.innerHTML = ''
+}
+
+function findTodoEntry(array, string){
+  for (i=0; i < array.length; i++) {
+    if (array[i].text === string) {
+        return array[i];
+    }
+  }
 }
