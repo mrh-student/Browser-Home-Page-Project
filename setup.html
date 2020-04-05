@@ -11,32 +11,13 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     
 </head>
-<body onload="readConfig()">
+<body onload="displayTimeZoneOptions(), readConfig()">
     <header>
         <h1>HomeTab Configuration</h1>
     </header>
     <main>
         <section>
-            <span><h3>Current configuration:</h3></span>  
-            <div id="read">
-                <table cellpadding="10px">
-                    <tr>
-                        <td><strong>User name: </strong></td>
-                        <td id="readName"></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Location for weather: </strong></td>
-                        <td id="readLocation"></td>
-                    </tr>
-                    <tr>
-                        <td><strong>openweathermap API key: </strong></td>
-                        <td id="readAPI"></td>
-                    </tr>
-                </table>
-            </div>
-        </section>
-        <section>
-            <span><h3>Update configuration:</h3></span><br>
+            <span><h3>Set/Update configuration:</h3></span><br>
             <span id="errormessage"></span>
             <table>
                 <tr>
@@ -52,6 +33,12 @@
                     <td><input type="text" value="" id="APIkey"></td>
                 </tr>
                 <tr>
+                    <td><span>Show additional time zones:</a></span></td>
+                    <td id="timeZoneOptions">
+                        
+                    </td>
+                </tr>
+                <tr>
                     <td></td>
                     <td><input type="button" class="button" value="Go" id="btnSubmitSetup"/></td>
                 </tr>
@@ -61,7 +48,7 @@
             <div id="greeting"></div>
             <div id="weather"></div>
             <div id="check" hidden ="true">
-                <span>Does that look good to you?</span>
+                <span>Ready to go?</span>
                 <br><br>
                 <input type='button' id='save' class='button' value='Yes, save.'/>
             </div>

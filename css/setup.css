@@ -37,6 +37,24 @@ span {
     margin: 5px;
 }
 
+.tz {
+    background-color: rgba(122, 130, 123, 0.29);
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.5em;
+    margin-top: 5px;
+    cursor: pointer;
+    border-radius: 25px;
+}
+
+.selected {
+    background-color: rgba(106, 190, 113, 0.568);
+}
+
 div {
     margin: 5px;
 }

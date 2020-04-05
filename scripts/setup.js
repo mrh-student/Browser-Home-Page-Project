@@ -1,10 +1,71 @@
-//** BUTTONS & INPUTS & LABELS */
+const timeZoneLocations = [
+    {
+        cities: [
+            'New York',
+            'Detroit'
+        ],
+        geo: 'America/Detroit'
+    },
+    {
+        cities: [
+            'San Francisco',
+            'Los Angeles',
+            'San Diego'
+        ],
+        geo: 'America/Los_Angeles'
+    },
+    {
+        cities: [
+            'Berlin',
+            'Paris',
+            'Amsterdam',
+            'Warsaw',
+            'Brussels',
+            'Vienna',
+            'Rome',
+            'Zurich'
+        ],
+        geo: 'Europe/Berlin'
+    },
+    {
+        cities: [
+            'London',
+            'Dublin',
+            'Lisbon'
+        ],
+        geo: 'Europe/London'
+    },
+    {
+        cities: [
+            'Sao Paulo',
+            'Mendoza'
+        ],
+        geo: 'America/Sao_Paulo'
+    },
+    {
+        cities: [
+            'Nashville',
+            'Chicago'
+        ],
+        geo: 'America/Chicago'
+    },
+    {
+        cities: [
+            'Melbourne'
+        ],
+        geo: 'Australia/Melbourne'
+    }
+]
 
+let selectedTimeZones = JSON.parse(localStorage.getItem('ConfigLocalStorage')).timeZones
+
+//** BUTTONS & INPUTS & LABELS */
 const btnSubmit = document.getElementById('btnSubmitSetup')
 const btnSave = document.getElementById('save')
 const inputName = document.getElementById('userName')
 const inputLocation = document.getElementById('userLocation')
 const inputAPIKey = document.getElementById('APIkey')
+const inputTimeZone = document.getElementById('timezone')
 const lblError = document.getElementById('errormessage')
 const lblGreeting = document.getElementById('greeting')
 const lblWeather = document.getElementById('weather')
@@ -20,16 +81,45 @@ btnSave.addEventListener('click', function(){
     backToHome()
 })
 
+
 //** MAIN */
+function displayTimeZoneOptions(){
+    // display time zone options
+    for(let i = 0; i < timeZoneLocations.length; i++){
+        const citiesList = timeZoneLocations[i].cities
+        for (let n = 0; n < citiesList.length; n++){
+            let selectedCity = citiesList[n]
+            let timeZoneBox = document.createElement('span')
+            timeZoneBox.id = selectedCity.replace(/\s/g, '').toLowerCase()
+            timeZoneBox.className = 'tz'
+            timeZoneBox.innerText = selectedCity
+            document.getElementById('timeZoneOptions').appendChild(timeZoneBox)
+        }
+    }
+    // attach event listener
+    let btnTzList = document.getElementsByClassName('tz');
+    for(i=0;i<btnTzList.length;i++){
+        btnTzList[i].addEventListener("click", function(e){
+            addTimeZone(createTzToAdd(e.target.innerText))
+            e.target.classList.toggle('selected')
+        })
+    } 
+}
 function readConfig(){
     const user = JSON.parse(localStorage.getItem('ConfigLocalStorage'))
+    console.log(user)
     const userName = user.userName
     const location = user.weatherLocation
     const openweatherAPI = user.openweatherAPI
+    const timeZones = user.timeZones
 
-    document.getElementById('readName').innerText = userName
-    document.getElementById('readLocation').innerText = location
-    document.getElementById('readAPI').innerText = openweatherAPI
+    inputName.value = userName
+    inputLocation.value = location
+    inputAPIKey.value = openweatherAPI
+
+    for(i=0; i<timeZones.length; i++){
+        document.getElementById(timeZones[i].listingId).className= 'tz selected';
+    }
 }
 function checkInput(){
     const name = inputName.value
@@ -65,7 +155,8 @@ function saveConfig(){
     const user = {
         userName: inputName.value,
         weatherLocation: inputLocation.value,
-        openweatherAPI: inputAPIKey.value
+        openweatherAPI: inputAPIKey.value,
+        timeZones: selectedTimeZones
     }
     localStorage.setItem('ConfigLocalStorage', JSON.stringify(user))
 }
@@ -85,6 +176,40 @@ function printWeather(temp, condition, location){
 }
 function printGreeting(name){
     lblGreeting.innerHTML = `Hi there ${name}`
+}
+function createTzToAdd(city){
+    for (i=0; i < timeZoneLocations.length; i++) {
+        const citiesList = timeZoneLocations[i].cities
+        if(citiesList.indexOf(city) != -1){
+            let timeZoneToAdd = {
+                listingGeo: timeZoneLocations[i].geo,
+                city: city,
+                listingId: city.replace(/\s/g, '').toLowerCase()
+            }
+            return timeZoneToAdd
+        }
+    }
+}
+function addTimeZone(entry){
+    if(selectedTimeZones.length < 1){
+        selectedTimeZones.push(entry)
+    }
+    else{
+        let entryFound = false
+        let entryIndex
+        for(i=0; i < selectedTimeZones.length; i++){
+            if(selectedTimeZones[i].listingId == entry.listingId){
+                entryFound = true
+                entryIndex = i
+            }
+        }
+        if(entryFound){
+            selectedTimeZones.splice(entryIndex,1)
+        }
+        else{
+            selectedTimeZones.push(entry)
+        }
+    }
 }
 function backToHome() {
     window.open ('index.html','_self',false)

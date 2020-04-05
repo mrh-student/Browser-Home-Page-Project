@@ -76,9 +76,9 @@ i {
   line-height: 1em;
 }
 
-.time_zone {
+.timeZone {
   margin-right: 20px;
-  white-space: nowrap;
+  /** white-space: nowrap; */
 }
 
 #quote-wrapper {

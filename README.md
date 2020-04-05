@@ -5,12 +5,11 @@ I am currently running the page locally as the default browser home page / new t
 <img src="images/screenshot.png" width="800px"> 
 
 #### Install
+Download, open `index.html` in your browser
+
 <p>To customise, the page needs your name, your location (for weather) and an <a href="https://openweathermap.org/appid#get">API key from openweathermap</a> (free option available). No affiliation, I just liked their weather data output the best.</p>
 
-When `index.html` is loaded and no configuration information is found, `setup.html` is loaded. You can enter name, location and API key here. The values are stored in local storage. 
-
-<p>If you want to download HomeTab to use as a homepage, make sure to get your own API key at https://openweathermap.org/appid#get, the default test key is a free key and will be temporarily blocked after a certain amount of calls.</p>
-
+When `index.html` is loaded and no configuration information is found, `setup.html` is loaded. You can enter name, location and API key here. You can also select additional time zones to display. The values are stored in local storage. 
 
 <p>Other customisation options not included in setup are described below.</p>
 <p>Once the page is customised to you, you can set it as the default home page / new tab page of your browser. No need to upload to a webspace, it can just run locally.</p>
@@ -18,7 +17,7 @@ When `index.html` is loaded and no configuration information is found, `setup.ht
 To update info, visit `setup.html` by using the settings icon in the bottom left corner. 
 
 
-#### Techniques used:
+#### Tech Stack:
 HTML, CSS, JavaScript
 
 #### Tested in:
@@ -41,7 +40,8 @@ More work on optimsation for smaller screens needed</p>
     - change the greetings and timeframes in index.js , `getGreeting()` function
 
 - Timezone Clocks: show current time in different locations around the world, updated every 0.5s
-    - modify `getTimeZones()` function and timeZoneList var in index.js to edit which cities / timezones to show
+    - which cities / timezones are shown can be customised in `setup.html``
+    - more cities can be added in in `setup.js` in `timeZoneLocations`object list
 
 - Quote: Shows a random quote whenever the page is loaded / reloaded 
     - currently using `_.sample` so picks can repeat, no other fine-tuning
@@ -60,7 +60,6 @@ More work on optimsation for smaller screens needed</p>
 - To Do List: Add to do items, cross them off and/or delete them. 
 
 - Search: bottom search bar searches Google for keyword in new tab
-
 
 
 #### Notes:
@@ -100,6 +99,5 @@ https://www.pexels.com/photo/body-of-water-with-mountains-on-side-937782/
 https://www.pexels.com/photo/layout-of-green-leaves-1227648/
 
 https://www.pexels.com/photo/snow-top-mountain-under-clear-sky-1054218/
-
 
 </p>

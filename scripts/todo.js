@@ -25,7 +25,6 @@ lblTodoList.addEventListener('click', function(e) {
     }
     localStorage.setItem('TodosLocalStorage', JSON.stringify(storedTodos))
   }
-  console.log(storedTodos)
 })
 
 function readTodos(){
@@ -34,7 +33,7 @@ function readTodos(){
   
   // get currently saved to do items from local storage
   let storedTodos = getStoredTodos()
-  
+
   if (storedTodos.length > 0){
     btnDel.hidden = false
     // create li elements in myUL to display stored to do items
