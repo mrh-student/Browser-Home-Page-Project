@@ -107,7 +107,7 @@ function deleteStoredTodos(){
 }
 
 function getStoredTodos(){
-  return JSON.parse(localStorage.getItem('TodosLocalStorage'))
+  return localStorage.getItem("TodosLocalStorage") === null ? [] : JSON.parse(localStorage.getItem('TodosLocalStorage'))
 }
 
 function clearAddNew(){

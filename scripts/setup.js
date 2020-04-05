@@ -57,7 +57,7 @@ const timeZoneLocations = [
     }
 ]
 
-let selectedTimeZones = JSON.parse(localStorage.getItem('ConfigLocalStorage')).timeZones
+let selectedTimeZones = localStorage.getItem("ConfigLocalStorage") === null ? [] : JSON.parse(localStorage.getItem('ConfigLocalStorage')).timeZones
 
 //** BUTTONS & INPUTS & LABELS */
 const btnSubmit = document.getElementById('btnSubmitSetup')
@@ -106,8 +106,8 @@ function displayTimeZoneOptions(){
     } 
 }
 function readConfig(){
-    const user = JSON.parse(localStorage.getItem('ConfigLocalStorage'))
-    console.log(user)
+    let user = localStorage.getItem("ConfigLocalStorage") === null ? {userName:'',weatherLocation:'',openweatherAPI:'',timeZones:[]} : JSON.parse(localStorage.getItem('ConfigLocalStorage'))
+    
     const userName = user.userName
     const location = user.weatherLocation
     const openweatherAPI = user.openweatherAPI
@@ -117,8 +117,10 @@ function readConfig(){
     inputLocation.value = location
     inputAPIKey.value = openweatherAPI
 
-    for(i=0; i<timeZones.length; i++){
-        document.getElementById(timeZones[i].listingId).className= 'tz selected';
+    if(timeZones.length > 0){
+        for(i=0; i<timeZones.length; i++){
+            document.getElementById(timeZones[i].listingId).className= 'tz selected';
+        }
     }
 }
 function checkInput(){
